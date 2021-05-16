@@ -11,6 +11,10 @@ class Userconnection(models.Model):
 class Affectation(models.Model):
     Centre_titre = models.CharField(max_length=100)
 
+class SousCentre(models.Model):
+    centre_titre = models.ForeignKey(Affectation , on_delete=models.CASCADE)
+    Sous_centre_titre = models.CharField(max_length=100)
+
 class CategoryModel(models.Model):
     category_name = models.CharField(max_length=100)
 
@@ -33,7 +37,7 @@ class Materiel(models.Model):
     Observation = models.CharField(max_length=100)
 
     def generatInventaire(Numero_inventaire_entre):
-        Numero_inventaire_entre = random.randint(1,10)
+        Numero_inventaire_entre = random.randint(1,6)
         return Numero_inventaire_entre
 
 
@@ -50,11 +54,8 @@ class Livraison(models.Model):
     Signatures = models.CharField(max_length=100)
 
     def generatInventaire(Numero_inventaire_sortie):
-        Numero_inventaire_entre = random.randint(1,10)
+        Numero_inventaire_entre = random.randint(1,6)
         return Numero_inventaire_entre
 
 
 
-class SousCentre(models.Model):
-    centre_titre = models.ForeignKey(Affectation , on_delete=models.CASCADE)
-    Sous_centre_titre = models.CharField(max_length=100)
