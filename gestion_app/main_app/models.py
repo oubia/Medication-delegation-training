@@ -41,5 +41,35 @@ class Livraison(models.Model):
     Signatures = models.CharField(max_length=100)
 
 
+"""class historique(models.Model):
+    Livraison=
+    Centre_titre=
+    Materiel=
+    Prix_achat_unite = models.FloatField()
+    Prix_achat_total = models.FloatField()
+    Marque = models.CharField(max_length=100)
+    Model = models.CharField(max_length=100)
+    Serie = models.CharField(max_length=100)
+Observation = models.CharField(max_length=100)
+
+class model():
+name:primary 
+
+
+
+class produit():
+    model
+
+
+
+
+
+
+
+
+
+"""
+
+
 
 

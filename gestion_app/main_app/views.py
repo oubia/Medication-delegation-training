@@ -15,6 +15,9 @@ def reception(request):
     return render(request,'reception.html')
 
 def livraison(request):
+    if request.method == 'POST':
+        print("-------------",request.POST)
+        return render(request, 'home.html')
     return render(request,'livraison.html')
 
 def historique(request):
