@@ -9,6 +9,9 @@ def home(request):
     return render(request, 'home.html')
 
 def reception(request):
+    if request.method == 'POST':
+        print("-------------",request.POST)
+        return render(request, 'home.html')
     return render(request,'reception.html')
 
 def livraison(request):
@@ -27,8 +30,9 @@ def Login(request):
         messages.error(request, 'Vous code ou mot de passe sont incorrects !')
         return render(request, 'login.html')
     return render(request, 'login.html')
+
 def Logout(request):
-    messages.success(request, 'vous aviez été déconnecté avec succès !')
+    messages.info(request, 'vous aviez été déconnecté avec succès !')
     return render(request,'login.html')
         
 
