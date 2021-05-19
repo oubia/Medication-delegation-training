@@ -43,18 +43,9 @@
                                                 <div class="form-group col-md-6">
                                                     <label for="cars" class="form-label">Choisie categorie:</label><br>
                                                     <select id="categorie" name="categorie" class="form-control select" size="1" required>
-                                                <option value="Mobilier de bureau">Mobilier de bureau</option>
-                                                <option value="Medico-technique">Medico-technique</option>
-                                                <option value="Materiel informatique">Materiel informatique</option>
-                                                <option value="Buanderie et cuisine">Buanderie et cuisine</option>
-                                                <option value="Habillement et linge">Habillement et linge</option>
-                                                <option value="Fournitures de bureau">Fournitures de bureau</option>
-                                                <option value="Fournitures informatique">Fournitures informatique</option>
-                                                <option value="Produits d'hygienne">Produits d'hygienne</option>
-                                                <option value="LITERIE ET COUCHAGE">LITERIE ET COUCHAGE</option>
-                                                <option value="Articles de plomberie sanitaire">Articles de plomberie sanitaire</option>
-                                                <option value="FOURNITURES ELECTRIQUES">FOURNITURES ELECTRIQUES</option>
-                                                <option value="Divers">Divers</option>
+                                                        {% for data in categories_data %}
+                                                        <option value="{{data.category_name}}">{{data.category_name}}</option>
+                                                        {% endfor %}
                                             </select>
                                                 </div>
                                             </div>
@@ -107,10 +98,7 @@
                                                 <textarea class="form-control " name="Observation" id="exampleFormControlTextarea1" rows="3" placeholder="Entrée l'observation" required></textarea>
                                             </div>
                                             <hr class="my-4">
-                                            <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Envoye</button>
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                {% include 'alert.html' %}
-                                            </div>
+                                            <button type="submit" class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Envoye</button>
                                         </form>
                                     </div>
                                 </div>
@@ -118,22 +106,18 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card m-3">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  </button>
-                    </h5>
+                <div style="margin-top: 18px;">
+                    {% include 'categories.html' %}
                 </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body">
-                    </div>
+                <div style="margin-top: 18px;">
+                    {% include 'Centre.html' %}
                 </div>
-            </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    {% include 'alert.html' %}
+                </div>
 
+            </div>
         </div>
-
     </main>
 </body>
 <script>

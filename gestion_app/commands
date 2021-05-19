@@ -1,0 +1,18 @@
+centre = Affectation(Centre_titre="Essaouira")
+centre.save()
+scentre = SousCentre(centre_titre_id=1 ,Sous_centre_titre="onagha")
+scentre.save()
+liv = Livraison(Titre_livraison="un titre de livraison",Affectation_id=1,Quantite_livree=10,Prix_unitaire=1
+   ...: 0,Decompte="un decompt",Signatures="Mr mohammed")
+
+liv.save()
+liv.Materiel.add(MaterielModel)
+
+materiel = MaterielModel(Designation_Object="desination",Category_name_id=1,Quantite=20,Emplacement="emplac
+   ...: ement",Prix_achat_unite=20.5,Prix_achat_total=30.30,Marque="marque",Model="model 1",Serie="serie ",Observat
+   ...: ion="observation")
+materiel.save()
+liv.Materiel.add(materiel)
+
+CategoryModelshit = CategoriesModel(category_name="category3")
+CategoryModelshit.save()
