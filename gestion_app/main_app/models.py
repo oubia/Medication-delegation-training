@@ -8,8 +8,10 @@ class Userconnection(models.Model):
 class Affectation(models.Model):
     Centre_titre = models.CharField(max_length=100)
 
+   
+
 class SousCentre(models.Model):
-    centre_titre = models.ForeignKey(Affectation, on_delete=models.CASCADE)
+    centre_titre = models.ForeignKey(Affectation , on_delete=models.CASCADE)
     Sous_centre_titre = models.CharField(max_length=100)
 
 class CategoriesModel(models.Model):
@@ -17,9 +19,10 @@ class CategoriesModel(models.Model):
 
 class MaterielModel(models.Model):
     Numero_inventaire_entre = models.CharField(max_length = 10,blank=True,editable=False,unique=True,default=create_new_ref_number)
-    Designation_Object = models.CharField(max_length=100)
-    Category_name = models.ForeignKey(CategoriesModel,on_delete=models.DO_NOTHING)
+    Designation_Object = models.CharField(max_length=80)
+    Category_name = models.ForeignKey(CategoriesModel,on_delete=models.CASCADE)
     Quantite = models.IntegerField()
+    Etat = models.CharField(max_length=100,default='Nouveau')
     Emplacement = models.CharField(max_length=100)
     Date_reception = models.DateTimeField(auto_now_add=True) 
     Prix_achat_unite = models.FloatField()
