@@ -9,7 +9,7 @@ class Affectation(models.Model):
     Centre_titre = models.CharField(max_length=100)
 
 class SousCentre(models.Model):
-    centre_titre = models.ForeignKey(Affectation , on_delete=models.CASCADE)
+    centre_titre = models.ForeignKey(Affectation, on_delete=models.CASCADE)
     Sous_centre_titre = models.CharField(max_length=100)
 
 class CategoriesModel(models.Model):

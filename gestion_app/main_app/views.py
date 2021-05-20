@@ -11,19 +11,37 @@ def home(request):
 
 def reception(request):
     if request.method == 'POST':
-        if request.POST["Categoryform_add"]:
+        if "Categoryform_add" in request.POST:
             CategoryoSaver = CategoriesModel(category_name=request.POST["Categoryform_add"])
             CategoryoSaver.save()
-            data = CategoriesModel.objects.all().values()
-            # print("-------------", json.dumps((data)))
             messages.success(request, 'Votre tach a bien effectue !')
             return render(request, 'home.html')
-    categories_data = CategoriesModel.objects.all().values()
-    # l=[]
-    # for i in categories_data:
-    #     l.append(i["category_name"])
-    context = {"categories_data":categories_data}
+        elif "Categoryform_delete" in request.POST:
+            CategoriesModel.objects.filter(category_name=request.POST["Categoryform_delete"]).delete()
+            messages.success(request, 'Votre tach a bien effectue !')
+            return render(request, 'home.html')
+        elif "Centre" in request.POST:
+            a = list(Affectation.objects.all().values())
+            if not any(d['Centre_titre'] == request.POST["Centre"]  for d in a):
+                print("==================",not any(d['Centre_titre'] == request.POST["Centre"]  for d in a))
+                Centre_saver = Affectation(Centre_titre=request.POST["Centre"])
+                Centre_saver.save()
+            else:
+                Centre_saver = Affectation(Centre_titre=request.POST["Centre"])
+                Sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Sous_centre"])
+                print(Sous_centre)
+                print(Affectation.objects.all().values())
+                print(SousCentre.objects.all().values())
+                messages.success(request, 'Votre tach a bien effectue !')
+                return render(request, 'home.html')
+            
+        else:
+            messages.error(request, "OPs Votre tach elle n'a pas effectue !")
+            return render(request, 'home.html')
 
+
+    categories_data = CategoriesModel.objects.all().values()
+    context = {"categories_data":categories_data}
     return render(request,'reception.html',context)
 
 def livraison(request):
