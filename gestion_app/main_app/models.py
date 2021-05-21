@@ -44,5 +44,3 @@ class Livraison(models.Model):
     Signatures = models.CharField(max_length=100)
 
 
-
-

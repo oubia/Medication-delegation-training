@@ -16,3 +16,10 @@ liv.Materiel.add(materiel)
 
 CategoryModelshit = CategoriesModel(category_name="category3")
 CategoryModelshit.save()
+
+
+In [26]: liv.Materiel.all().values()
+Out[26]: <QuerySet [{'id': 3, 'Numero_inventaire_entre': '754852', 
+'Designation_Object': 'desination', 'Category_name_id': 1, 'Quantite': 20,
+ 'Etat': 'Nouveau', 'Emplacement': 'emplacement', 'Date_reception': datetime.datetime(2021, 5, 21, 19, 54, 1, 749987, tzinfo=<UTC>), 'Prix_achat_unite': 20.5, 'Prix_achat_total': 30.3, 'Marque': 'marque', 
+'Model': 'model 1', 'Serie': 'serie ', 'Observation': 'observation'}]>
