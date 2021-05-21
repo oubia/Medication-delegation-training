@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render 
 from django.contrib import messages
 from .models import * 
 from .loginform import *
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -65,36 +66,17 @@ def reception(request):
 
 def livraison(request):
     categories_data = CategoriesModel.objects.all().values()
-    context = {"categories_data":categories_data}
-    print(context)
     materielle_data = MaterielModel.objects.all().values()
     print(materielle_data)
-    materiel= {"materielle_data":materielle_data}
-    print("----------------------------------------------------")
-    print(materiel)
-    """if request.method == 'POST':
-        if "Categoryform_add" in request.POST:
-            category_id = CategoriesModel.objects.get(category_name=request.POST["categorie"])
-            print(category_id.id)
-            New_materiel = MaterielModel(
-                Titre_livraison = request.POST["Desingation"],
-                Category_name_id = category_id.id,
-                Quantite = request.POST["Quantite"],
-                Materiel = request.POST["raiobox"],
-                Date_sortie = request.POST["Emplacement"] ,
-                Quantite_livree = request.POST["prix_unite"],
-                Prix_unitaire = request.POST["prix_total"],
-                Affectation = request.POST["Marque"],
-                sous_centre = request.POST["Marque"],
-                Decompte = request.POST["Model"],
-                autor_name = request.POST["Sriee"],
-                Signatures = request.POST["Observation"]
-            )
-            New_materiel.save()
-            messages.success(request, 'Votre tach a bien effectue !')"""
+    # print(jsonRequest(request))
+    context = {'categories_data':categories_data,'materielle_data':materielle_data}
     return render(request,'livraison.html',context)
     
-
+# def jsonRequest(request):
+#     centre = Affectation.objects.all().values
+#     sous_centre = SousCentre.objects.all().values()
+#     contianer = {'centre':centre,'sous_centre':sous_centre}
+#     return JsonResponse(contianer,status=200)
 
 
 

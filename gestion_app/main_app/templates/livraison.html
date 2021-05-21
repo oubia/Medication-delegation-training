@@ -38,77 +38,73 @@
                             <div class="">
                                 <div class="card">
                                     <div class="card-header" style="text-align: center;">
-                                        Livraison  materiel
+                                        Livraison materiel
                                     </div>
                                     <div class="card-body ">
                                         <form class="needs-validation" action="" method="POST" novalidate>
                                             {% csrf_token %} {{ form.as_p }}
 
                                             <div class="form-row">
-                                                
+
                                                 <!--<div class="form-group col-md-6">
                                                     <label for="désignation_des_objets" class="form-label">désignation des objets</label>
                                                     <input type="text" class="form-control " name="Desingation" placeholder="Entrée la désignation des objets" required>
                                                 </div>-->
                                                 <div class="form-group col-md-6">
-                                                    <label for="cars" class="form-label">Choisie materielle:</label><br>
-                                                    <select id="categorie" name="materieel" class="form-control select categorie" size="1" required>
-                                                        {% for data in materiel %}
-                                                        <option value="{{data.Designation_Object}}">{{data.Designation_Object}}</option>
+                                                    <label for="materieel" class="form-label">Choisie materielle:</label><br>
+                                                    <select id="materieel" name="materieel" class="form-control select categorie" size="1" required>
+                                                        {% for data in materielle_data %}
+                                                            <option value="{{data.Designation_Object}}">{{data.Designation_Object}}</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="cars" class="form-label">Choisie categorie:</label><br>
-                                                    <select id="categorie" name="Categoryform_delete" class="form-control select" size="1" required>
+                                                    <label for="categorie" class="form-label">Choisie categorie:</label><br>
+                                                    <select id="categorie" name="categorie" class="form-control select" size="1" required>
                                                         {% for data in categories_data %}
-                                                        <option value="{{data.category_name}}">{{data.category_name}}</option>
+                                                            <option value="{{data.category_name}}">{{data.category_name}}</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-row ">
-                                                <div class="form-group col-md-6">
-                                                    <label for="prix_achat_unite">prix unitaire</label>
-                                                    <input type="number" name="prix_unite" placeholder="1.0" step="0.1" min="0" class="form-control" placeholder="prix d'achat de l'unite" required>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="prix_achat_unite">Decompte</label>
-                                                    <input type="number" name="prix_unite" placeholder="1.0" step="0.1" min="0" class="form-control" placeholder="prix d'achat de l'unite" required>
-                                                </div>
+
+                                                <label for="Decompt">Decompt</label>
+                                                <input type="text" class="form-control" name="Decompt" id="formGroupExampleInput" placeholder="Entrée la Emplacement" required>
                                             </div>
                                             <div class="form-row col-md-13 mb-4">
-                                                <label for="formGroupExampleInput">Quantite livre</label>
-                                                <input type="number" min="1" name="Quantite" class="form-control" id="formGroupExampleInput" placeholder="Entrée la Quantite" required>
+                                                <label for="Quantite_livre">Quantite livre</label>
+                                                <input type="number" min="1" name="Quantite_livre" class="form-control" id="formGroupExampleInput" placeholder="Entrée la Quantite" required>
                                             </div>
-                                        
+
                                             <hr class="my-4">
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="formGroupExampleInput">Centre</label>
-                                                    <input type="text" class="form-control" name="Emplacement" id="formGroupExampleInput" placeholder="Entrée la Emplacement" required>
-                                                </div>
+                                                    <!-- select -->
+                                                    <label for="Centre">Centre</label>
+                                                    <select id="Centre" name="Centre" class="form-control select categorie" size="1" required>
+         
+                                                        <option value="">data</option>
+                                                    </select> </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="formGroupExampleInput">Sous Centre</label>
-                                                    <input type="text" name="Marque" class="form-control" id="formGroupExampleInput" placeholder="Entrée la Marque" required>
-                                                </div>
+                                                    <!-- select -->
+                                                    <label for="Sous_Centre">Sous Centre</label>
+                                                    <select id="Sous_Centre" name="Sous_Centre" class="form-control select categorie" size="1" required>
+                                                        <option value="">data</option>
+                                                    </select> </div>
                                             </div>
-                                            
+
                                             <div class="form-row col-md-13 mb-4">
-                                                <label for="formGroupExampleInput">Titre de livraison</label>
-                                                <input type="text" min="1" name="Quantite" class="form-control" id="formGroupExampleInput" placeholder="Titre de livraison" required>
-                                            </div>
-                                            <div class="form-row col-md-13 mb-4">
-                                                <label for="formGroupExampleInput">Singnature</label>
-                                                <input type="text" min="1" name="Quantite" class="form-control" id="formGroupExampleInput" placeholder="Entrée la Singnature" required>
+                                                <label for="Titre_de_livraison">Titre de livraison</label>
+                                                <input type="text" min="1" name="Titre_de_livraison" class="form-control" id="formGroupExampleInput" placeholder="Titre de livraison" required>
                                             </div>
                                             <div class="form-row col-md-13 mb-4">
-                                                <label for="formGroupExampleInput">Autor</label>
-                                                <input type="text" min="1" name="Quantite" class="form-control" id="formGroupExampleInput" placeholder="Entrée le nom" required>
+                                                <label for="Singnature">Singnature</label>
+                                                <input type="text" min="1" name="Singnature" class="form-control" id="formGroupExampleInput" placeholder="Entrée la Singnature" required>
                                             </div>
                                             <hr class="my-4">
                                             <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Envoye</button>
-                                            <button type="button" class="btn btn-secondary btn-lg btn-block"data-toggle="modal" data-target="#exampleModal">Extraire le bonde de livraison</button>
+                                            <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Extraire le bonde de livraison</button>
                                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 {% include 'alert.html' %}
                                             </div>
@@ -138,9 +134,9 @@
     </main>
 </body>
 <script>
-        $(document).ready(function() {
+    $(document).ready(function() {
         $('').select2();
-        });
+    });
 </script>
 
 <script>
