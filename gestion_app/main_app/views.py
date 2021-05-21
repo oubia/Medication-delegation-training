@@ -64,10 +64,62 @@ def reception(request):
     return render(request,'reception.html',context)
 
 def livraison(request):
-    return render(request,'livraison.html')
+    categories_data = CategoriesModel.objects.all().values()
+    context = {"categories_data":categories_data}
+    print(context)
+    materielle_data = MaterielModel.objects.all().values()
+    print(materielle_data)
+    materiel= {"materielle_data":materielle_data}
+    print("----------------------------------------------------")
+    print(materiel)
+    """if request.method == 'POST':
+        if "Categoryform_add" in request.POST:
+            category_id = CategoriesModel.objects.get(category_name=request.POST["categorie"])
+            print(category_id.id)
+            New_materiel = MaterielModel(
+                Titre_livraison = request.POST["Desingation"],
+                Category_name_id = category_id.id,
+                Quantite = request.POST["Quantite"],
+                Materiel = request.POST["raiobox"],
+                Date_sortie = request.POST["Emplacement"] ,
+                Quantite_livree = request.POST["prix_unite"],
+                Prix_unitaire = request.POST["prix_total"],
+                Affectation = request.POST["Marque"],
+                sous_centre = request.POST["Marque"],
+                Decompte = request.POST["Model"],
+                autor_name = request.POST["Sriee"],
+                Signatures = request.POST["Observation"]
+            )
+            New_materiel.save()
+            messages.success(request, 'Votre tach a bien effectue !')"""
+    return render(request,'livraison.html',context)
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def historique(request):
     return render(request,'historique.html')
+
 
 def Login(request):
     if request.method == 'POST':
