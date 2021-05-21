@@ -1,0 +1,37 @@
+<main>
+    <div id="accordion">
+        <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+                <button class="btn btn-outline-dark" data-toggle="collapse" data-target="#centre" aria-expanded="false" aria-controls="collapseTwo">Centre form
+      </button>
+            </h5>
+        </div>
+        <div id="centre" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+                <div class="card">
+                    <div class="card-header">
+                        Centre form
+                    </div>
+                    <div class="card-body ">
+                        <form class="needs-validation" action="" method="POST" novalidate>
+                            {% csrf_token %} {{ form.as_p }}
+                            <div class="form-row ">
+
+                                <div class="form-group col-md-6">
+                                    <label for="Centre" class="form-label">Centre</label>
+                                    <input type="text" class="form-control " name="Centre" placeholder="Entrée la désignation des objets" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Sous_centre" class="form-label">Sous Centre</label>
+                                    <input type="text" class="form-control " name="Sous_centre" placeholder="Entrée la désignation des objets">
+                                </div>
+                                <hr class="my-4">
+                                <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Ajouter Centre</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
