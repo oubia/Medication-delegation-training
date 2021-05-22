@@ -65,6 +65,19 @@ def reception(request):
     return render(request,'reception.html',context)
 
 def livraison(request):
+    """"if "Desingation" in request.POST:
+        New_livraison = Livraison(Quantite = request.POST["Quantite"],
+        materieel = request.POST["materieel"],
+        Decompt = request.POST["Decompt"],
+        Quantite_livre = request.POST["Quantite_livre"],
+        Centre = request.POST["Centre"],
+        Sous_Centre = request.POST["Sous_Centre"],
+        Titre_de_livraison = request.POST["Titre_de_livraison"],
+        Singnature = request.POST["Singnature"])
+        New_livraison.save()
+        messages.success(request, 'Votre tach a bien effectue !')
+        return render(request, 'home.html')"""
+
     categories_data = CategoriesModel.objects.all().values()
     materielle_data = MaterielModel.objects.all().values()
     print(materielle_data)
@@ -72,6 +85,60 @@ def livraison(request):
     context = {'categories_data':categories_data,'materielle_data':materielle_data}
     return render(request,'livraison.html',context)
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # def jsonRequest(request):
 #     centre = Affectation.objects.all().values
 #     sous_centre = SousCentre.objects.all().values()

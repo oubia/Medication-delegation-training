@@ -26,7 +26,7 @@
         <div id="accordion">
             <div class="card m-3" style="border: 15px;">
                 <div class="card-header" id="headingOne">
-                    <h3 class="mb-0" style="text-align: center;">
+                    <h3 class="mb-0">
                         <button class="btn btn-outline-dark" data-toggle="collapse" data-target="#reception_form" aria-expanded="true" aria-controls="collapseOne">
                     livraison form
                   </button>
@@ -43,26 +43,12 @@
                                     <div class="card-body ">
                                         <form class="needs-validation" action="" method="POST" novalidate>
                                             {% csrf_token %} {{ form.as_p }}
-
-                                            <div class="form-row">
-
-                                                <!--<div class="form-group col-md-6">
-                                                    <label for="désignation_des_objets" class="form-label">désignation des objets</label>
-                                                    <input type="text" class="form-control " name="Desingation" placeholder="Entrée la désignation des objets" required>
-                                                </div>-->
+                                            <div class="form-row">                                    
                                                 <div class="form-group col-md-6">
-                                                    <label for="materieel" class="form-label">Choisie materielle:</label><br>
+                                                    <label for="materieel" class="form-label an">Choisie materielle:</label><br>
                                                     <select id="materieel" name="materieel" class="form-control select categorie" size="1" required>
                                                         {% for data in materielle_data %}
                                                             <option value="{{data.Designation_Object}}">{{data.Designation_Object}}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="categorie" class="form-label">Choisie categorie:</label><br>
-                                                    <select id="categorie" name="categorie" class="form-control select" size="1" required>
-                                                        {% for data in categories_data %}
-                                                            <option value="{{data.category_name}}">{{data.category_name}}</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
@@ -103,8 +89,7 @@
                                                 <input type="text" min="1" name="Singnature" class="form-control" id="formGroupExampleInput" placeholder="Entrée la Singnature" required>
                                             </div>
                                             <hr class="my-4">
-                                            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Envoye</button>
-                                            <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Extraire le bonde de livraison</button>
+                                            <button type="submit" class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Envoye</button>
                                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 {% include 'alert.html' %}
                                             </div>
@@ -127,6 +112,9 @@
                     <div class="card-body">
                     </div>
                 </div>
+                <div style="margin-top: 18px;">
+                    {% include 'bon_de_livraison.html' %}
+                </div>
             </div>
 
         </div>
@@ -135,7 +123,7 @@
 </body>
 <script>
     $(document).ready(function() {
-        $('').select2();
+        $('.an').select2();
     });
 </script>
 
