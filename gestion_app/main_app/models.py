@@ -39,6 +39,7 @@ class Livraison(models.Model):
     Titre_livraison = models.CharField(max_length=100)
     Materiel = models.ManyToManyField(MaterielModel,related_name='Materiel_id')#rm
     Affectation = models.ForeignKey(Affectation , on_delete=models.CASCADE)#rm
+    Sous_centre_id = models.ForeignKey(SousCentre,on_delete=models.CASCADE)
     Date_sortie = models.DateTimeField(auto_now_add=True) 
     Quantite_livree = models.IntegerField()
     Prix_unitaire = models.FloatField()

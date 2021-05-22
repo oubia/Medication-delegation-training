@@ -14,7 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js'%}"></script>
     <title>livraison</title>
 </head>
 
@@ -43,14 +44,18 @@
                                     <div class="card-body ">
                                         <form class="needs-validation" action="" method="POST" novalidate>
                                             {% csrf_token %} {{ form.as_p }}
-                                            <div class="form-row">                                    
+                                            <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="materieel" class="form-label an">Choisie materielle:</label><br>
-                                                    <select id="materieel" name="materieel" class="form-control select categorie" size="1" required>
+                                                    <label for="materiel" class="form-label an">Choisie materielle:</label><br>
+                                                    <select id="materiel" name="materiel" class="form-control select categorie" size="1" required>
                                                         {% for data in materielle_data %}
                                                             <option value="{{data.Designation_Object}}">{{data.Designation_Object}}</option>
                                                         {% endfor %}
                                                     </select>
+                                                </div>
+                                                <div class="form-row col-md-13 mb-4">
+                                                    <label for="Prix_unitaire">Prix unitaire</label>
+                                                    <input type="number" min="1" name="Prix_unitaire" class="form-control" id="formGroupExampleInput" placeholder="Entrée la Quantite" required>
                                                 </div>
                                             </div>
                                             <div class="form-row ">
@@ -70,13 +75,17 @@
                                                     <label for="Centre">Centre</label>
                                                     <select id="Centre" name="Centre" class="form-control select categorie" size="1" required>
          
-                                                        <option value="">data</option>
+                                                        <option value="centre 2">centre 2</option>
+                                                        <option value="centre 1">centre 1</option>
+
+
                                                     </select> </div>
                                                 <div class="form-group col-md-6">
                                                     <!-- select -->
                                                     <label for="Sous_Centre">Sous Centre</label>
                                                     <select id="Sous_Centre" name="Sous_Centre" class="form-control select categorie" size="1" required>
-                                                        <option value="">data</option>
+                                                        <option value="sous centre 1.2">sous centre 1.2</option>
+
                                                     </select> </div>
                                             </div>
 

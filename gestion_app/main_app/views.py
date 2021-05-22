@@ -3,8 +3,8 @@ from django.contrib import messages
 from .models import * 
 from .loginform import *
 from django.http import JsonResponse
-
-# Create your views here.
+import json
+from django.core import serializers# Create your views here.
 
 def home(request):
     return render(request, 'home.html')
@@ -27,7 +27,6 @@ def reception(request):
         elif "Centre" in request.POST:
             a = list(Affectation.objects.all().values())
             if not any(d['Centre_titre'] == request.POST["Centre"]  for d in a):
-                print("==================",not any(d['Centre_titre'] == request.POST["Centre"]  for d in a))
                 Centre_saver = Affectation(Centre_titre=request.POST["Centre"])
                 Centre_saver.save()
             else:
@@ -38,7 +37,6 @@ def reception(request):
                 return render(request, 'home.html')
         elif "Desingation" in request.POST:
             category_id = CategoriesModel.objects.get(category_name=request.POST["categorie"])
-            print(category_id.id)
             New_materiel = MaterielModel(
                 Designation_Object = request.POST["Desingation"],
                 Category_name_id = category_id.id,
@@ -65,24 +63,39 @@ def reception(request):
     return render(request,'reception.html',context)
 
 def livraison(request):
-    """"if "Desingation" in request.POST:
-        New_livraison = Livraison(Quantite = request.POST["Quantite"],
-        materieel = request.POST["materieel"],
-        Decompt = request.POST["Decompt"],
-        Quantite_livre = request.POST["Quantite_livre"],
-        Centre = request.POST["Centre"],
-        Sous_Centre = request.POST["Sous_Centre"],
-        Titre_de_livraison = request.POST["Titre_de_livraison"],
-        Singnature = request.POST["Singnature"])
-        New_livraison.save()
-        messages.success(request, 'Votre tach a bien effectue !')
-        return render(request, 'home.html')"""
-
-    categories_data = CategoriesModel.objects.all().values()
+    centre_data = Affectation.objects.all()
+    sous_centre_data = SousCentre.objects.all()
     materielle_data = MaterielModel.objects.all().values()
-    print(materielle_data)
+    if request.method == 'POST':
+        if 'Titre_de_livraison' in request.POST:
+            materiel = MaterielModel.objects.get(Designation_Object=request.POST["materiel"])
+            materiel = materiel.id
+            centre_id = Affectation.objects.get(Centre_titre=request.POST["Centre"])
+            sous_centre = SousCentre.objects.get(Sous_centre_titre=request.POST['Sous_Centre'])
+            print(centre_id.id)
+            New_livraison = Livraison(
+                Titre_livraison  = request.POST["Titre_de_livraison"],
+                Affectation  = centre_id,
+                Sous_centre_id = sous_centre,
+                Quantite_livree = request.POST["Quantite_livre"],
+                Decompte  = request.POST["Decompt"],
+                Prix_unitaire = request.POST['Prix_unitaire'],
+                Signatures = request.POST["Singnature"])
+            New_livraison.save()
+            New_livraison.Materiel.add(materiel)
+            messages.success(request, 'Votre tach a bien effectue !')
+            return render(request, 'home.html')
+        else:
+            messages.error(request, "OPs Votre tach elle n'a pas effectue !")
+            return render(request, 'home.html')
+    if request.is_ajax():
+        data ={'centre_data':centre_data,'sous_centre_data':sous_centre_data}
+        data = serializers.serialize('json', centre_data)
+    
+        # data = {'centre_data':centre_data,'sous_centre_data':sous_centre_data}
+        return JsonResponse(data,safe=False,status=200)
     # print(jsonRequest(request))
-    context = {'categories_data':categories_data,'materielle_data':materielle_data}
+    context = {'materielle_data':materielle_data}
     return render(request,'livraison.html',context)
     
 
