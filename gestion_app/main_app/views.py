@@ -83,14 +83,23 @@ def livraison(request):
                 Signatures = request.POST["Singnature"])
             New_livraison.save()
             New_livraison.Materiel.add(materiel)
+            # New_Historique = historique(
+            #         Livraison_historique_id = New_livraison.id,
+            #         Materiel_historique_id = materiel,
+            #         Centre_titre_id = request.POST["Centre"],
+            #         Sous_centre_titre_id = request.POST['Sous_Centre'])
+            # New_Historique.save()
+            # print(New_Historique)        
             messages.success(request, 'Votre tach a bien effectue !')
             return render(request, 'home.html')
         else:
             messages.error(request, "OPs Votre tach elle n'a pas effectue !")
             return render(request, 'home.html')
     if request.is_ajax():
-        data ={'centre_data':centre_data,'sous_centre_data':sous_centre_data}
-        data = serializers.serialize('json', centre_data)
+        centre_data = Affectation.objects.all()
+        queryset = {'centre_data':centre_data,'sous_centre_data':sous_centre_data}
+        # serializer = BookSerializer(queryset, many=True)
+        data = serializers.serialize('json',queryset, many=True,ensure_ascii=False)
     
         # data = {'centre_data':centre_data,'sous_centre_data':sous_centre_data}
         return JsonResponse(data,safe=False,status=200)

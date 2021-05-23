@@ -32,6 +32,7 @@ class MaterielModel(models.Model):
     Model = models.CharField(max_length=100)
     Serie = models.CharField(max_length=100)
     Observation = models.CharField(max_length=100)
+    author_reception = models.CharField(max_length=10)
 
 
 class Livraison(models.Model):
@@ -45,9 +46,12 @@ class Livraison(models.Model):
     Prix_unitaire = models.FloatField()
     Decompte = models.CharField(max_length=100)
     Signatures = models.CharField(max_length=100)
+    author_livraison = models.CharField(max_length=10)
+
 
 
 class historique(models.Model):
-    Livraison_historique=models.ForeignKey(Livraison,on_delete=DO_NOTHING)
-    Materiel_historique=models.ForeignKey(MaterielModel,on_delete=DO_NOTHING)
-    Centre_livree = models.ForeignKey(SousCentre,on_delete=DO_NOTHING)
+    Livraison_historique = models.ForeignKey(Livraison,on_delete=models.CASCADE)
+    Materiel_historique = models.ForeignKey(MaterielModel,on_delete=models.CASCADE)
+    Centre_titre = models.CharField(max_length=100)
+    Sous_centre_titre = models.CharField(max_length=100)

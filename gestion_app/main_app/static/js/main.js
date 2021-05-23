@@ -1,6 +1,6 @@
 $(function($) {
     $.ajax({
-        url: '',
+        url: 'http://127.0.0.1:8000/livraison/',
         type: 'get',
         data: {
             ready_text: $(this).text()
@@ -11,6 +11,7 @@ $(function($) {
                 out += response[i];
             }
             console.log(out)
+
         }
     })
 })
