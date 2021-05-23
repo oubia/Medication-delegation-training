@@ -7,14 +7,59 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/main.css'%}" rel="stylesheet" />
+
     <title>historique</title>
 </head>
 
 <body>
     <main>
-        <h1> historique page</h1>
+        <h1 style="text-align: center;"> Voir les historique page</h1>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+        <table id="myTable">
+            <tr class="header">
+                <th style="width:60%;">Name</th>
+                <th style="width:40%;">Country</th>
+            </tr>
+            <tr>
+                <td>Alfreds Futterkiste</td>
+                <td>Germany</td>
+            </tr>
+            <tr>
+                <td>Berglunds snabbkop</td>
+                <td>Sweden</td>
+            </tr>
+            <tr>
+                <td>Island Trading</td>
+                <td>UK</td>
+            </tr>
+            <tr>
+                <td>Koniglich Essen</td>
+                <td>Germany</td>
+            </tr>
+            <tr>
+                <td>Laughing Bacchus Winecellars</td>
+                <td>Canada</td>
+            </tr>
+            <tr>
+                <td>Magazzini Alimentari Riuniti</td>
+                <td>Italy</td>
+            </tr>
+            <tr>
+                <td>North/South</td>
+                <td>UK</td>
+            </tr>
+            <tr>
+                <td>Paris specialites</td>
+                <td>France</td>
+            </tr>
+        </table>
     </main>
+
 </body>
+<script src="{% static 'js/main.js'%}"></script>
+
 {% endblock %}
 
 </html>

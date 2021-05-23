@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import *
+from .models import MaterielModel,Livraison,Affectation,SousCentre,CategoriesModel
 
-# Register your models here.
+admin.site.register(Userconnection)
+
