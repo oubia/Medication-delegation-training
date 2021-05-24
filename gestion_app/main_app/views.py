@@ -11,18 +11,6 @@ from django.contrib.auth import authenticate,login as dj_login,logout
 
 
 
-def register(request):
-    form=createuserform()
-    if request.method=='POST':
-        form=createuserform(request.POST)
-        if form.is_valid():
-            form.save()
-            user=form.cleaned_data.get('username')
-            messages.success(request,'Account was created for ' + user)
-            return redirect('login')
-
-    context={'form':form}
-    return render(request, 'register.html',context)
 
 
 def login(request):
@@ -36,6 +24,7 @@ def login(request):
             return redirect('home')
     context={}
     return render(request, 'login.html',context)
+
 def home(request):
     return render(request, 'home.html')
 
