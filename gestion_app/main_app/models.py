@@ -1,10 +1,16 @@
 from django.db import models
 from django.db.models.deletion import DO_NOTHING
 from .utils import create_new_ref_number
+from django.contrib.auth.models import User
 # Create your models here.
 class Userconnection(models.Model):
     code = models.CharField(max_length=6)
     password = models.CharField(max_length=6)
+
+    def fun (self,text_code):
+        if self.code == code:
+            context = {'code':code}
+            return context
 
 
 
@@ -55,3 +61,9 @@ class historique(models.Model):
     Materiel_historique = models.ForeignKey(MaterielModel,on_delete=models.CASCADE)
     Centre_titre = models.CharField(max_length=100)
     Sous_centre_titre = models.CharField(max_length=100)
+
+
+class createuserform(models.Model):
+    class Meta:
+        model=User
+        fields=['username','email','password1','password2']
