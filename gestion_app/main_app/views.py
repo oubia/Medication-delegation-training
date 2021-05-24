@@ -29,18 +29,12 @@ def login(request):
     if request.method=='POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
-
         user = authenticate(request,username=username,password=password)
         if user is not None:
             dj_login(request, user)
             print('------------------------')
             return redirect('home')
-
     context={}
-
-
-
-
     return render(request, 'login.html',context)
 def home(request):
     return render(request, 'home.html')
