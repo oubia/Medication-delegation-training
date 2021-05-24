@@ -7,8 +7,7 @@ from django.http import JsonResponse
 import json
 from django.core import serializers
 from .forms import createuserform
-from django.contrib.auth import authenticate,login as dj_login,logout
-
+from django.contrib.auth import authenticate,login as dj_login,logout as logoutt
 
 
 
@@ -22,8 +21,15 @@ def login(request):
             dj_login(request, user)
             print('------------------------')
             return redirect('home')
+        else:
+            messages.info(request,'Username or password is incorrecct')
+    
     context={}
     return render(request, 'login.html',context)
+
+def logout(request):
+    logoutt(request)
+    return redirect('login')
 
 def home(request):
     return render(request, 'home.html')

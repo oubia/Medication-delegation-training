@@ -35,7 +35,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="/login/">Connecter</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Deconnecter</a>
+                <a class="dropdown-item" href="/logout/">Deconnecter</a>
             </div>
         </ul>
     </nav>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     
-                    <div class="small">Logged in as:</div>
+                    <div class="small">Logged in as: {{request.user}}</div>
                 </div>
             </nav>
         </div>
