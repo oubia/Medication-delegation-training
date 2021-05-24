@@ -10,7 +10,6 @@ $(function($) {
             console.log('historique', historique)
             console.log('reception', reception)
             console.log('livraison', livraison)
-
         }
     })
 })
