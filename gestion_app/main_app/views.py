@@ -1,10 +1,12 @@
 from django.shortcuts import render 
 from django.contrib import messages
+from rest_framework import serializers
 from .models import * 
-from .loginform import *
 from django.http import JsonResponse
-import json
-from django.core import serializers# Create your views here.
+import pandas as pd
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import *
 
 def home(request):
     return render(request, 'home.html')
@@ -62,9 +64,9 @@ def reception(request):
     context = {"categories_data":categories_data}
     return render(request,'reception.html',context)
 
+
+@api_view(['GET','POST'])    
 def livraison(request):
-    centre_data = Affectation.objects.all()
-    sous_centre_data = SousCentre.objects.all()
     materielle_data = MaterielModel.objects.all().values()
     if request.method == 'POST':
         if 'Titre_de_livraison' in request.POST:
@@ -72,7 +74,6 @@ def livraison(request):
             materiel = materiel.id
             centre_id = Affectation.objects.get(Centre_titre=request.POST["Centre"])
             sous_centre = SousCentre.objects.get(Sous_centre_titre=request.POST['Sous_Centre'])
-            print(centre_id.id)
             New_livraison = Livraison(
                 Titre_livraison  = request.POST["Titre_de_livraison"],
                 Affectation  = centre_id,
@@ -83,114 +84,50 @@ def livraison(request):
                 Signatures = request.POST["Singnature"])
             New_livraison.save()
             New_livraison.Materiel.add(materiel)
-            # New_Historique = historique(
-            #         Livraison_historique_id = New_livraison.id,
-            #         Materiel_historique_id = materiel,
-            #         Centre_titre_id = request.POST["Centre"],
-            #         Sous_centre_titre_id = request.POST['Sous_Centre'])
-            # New_Historique.save()
-            # print(New_Historique)        
+            materiel = MaterielModel.objects.get(Designation_Object=request.POST["materiel"])
+
+            New_Historique = historiqueModel(
+                    Livraison_historique = New_livraison,
+                    Materiel_historique = materiel,
+                    Centre_titre = request.POST["Centre"],
+                    Sous_centre_titre = request.POST['Sous_Centre'])
+            New_Historique.save()
+            print("//////////////////////////",New_Historique)        
             messages.success(request, 'Votre tach a bien effectue !')
             return render(request, 'home.html')
         else:
             messages.error(request, "OPs Votre tach elle n'a pas effectue !")
             return render(request, 'home.html')
     if request.is_ajax():
-        centre_data = Affectation.objects.all()
-        queryset = {'centre_data':centre_data,'sous_centre_data':sous_centre_data}
-        # serializer = BookSerializer(queryset, many=True)
-        data = serializers.serialize('json',queryset, many=True,ensure_ascii=False)
-    
-        # data = {'centre_data':centre_data,'sous_centre_data':sous_centre_data}
-        return JsonResponse(data,safe=False,status=200)
-    # print(jsonRequest(request))
-    context = {'materielle_data':materielle_data}
-    return render(request,'livraison.html',context)
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def jsonRequest(request):
-#     centre = Affectation.objects.all().values
-#     sous_centre = SousCentre.objects.all().values()
-#     contianer = {'centre':centre,'sous_centre':sous_centre}
-#     return JsonResponse(contianer,status=200)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        sous_centre = SousCentre.objects.all()
+        Center = Affectation.objects.all()
+        centre = CentreSerializer(Center,many=True)
+        sous_centre = SousCanterSerializer(sous_centre,many=True)
+        
+        response = {
+            'centre': centre.data,
+            'sous_centre':sous_centre.data
+        }
+        return JsonResponse(response,safe=False, status=201)
+    return render(request,'livraison.html',context={'materielle_data':materielle_data})  
 
 def historique(request):
+    if request.is_ajax():
+        historique = historiqueModel.objects.all()
+        materielle_data = MaterielModel.objects.all()
+        Livraison_data = Livraison.objects.all()
+        historique = historiqueModelSerializer(historique,many=True)
+        materielle_data = MaterielModelSerializer(materielle_data,many=True)
+        Livraison_data = LivraisonSerializer(Livraison_data,many=True)
+        
+        
+        response = {
+            'historique': historique.data,
+            'materielle_data':materielle_data.data,
+            'Livraison_data':Livraison_data.data
+        }
+        return JsonResponse(response,safe=False, status=201)
     return render(request,'historique.html')
-
 
 def Login(request):
     if request.method == 'POST':
