@@ -33,9 +33,9 @@
             <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/login">Connecter</a>
+                <a class="dropdown-item btn-outline-dark" href="/login">Connecter</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/login">Deconnecter</a>
+                <a class="dropdown-item btn-outline-dark" href="/logout">Deconnecter</a>
             </div>
         </ul>
     </nav>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    {{request.user}}
                 </div>
             </nav>
         </div>
@@ -89,7 +89,7 @@
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; Created By <a href="https://www.linkedin.com/in/oubia-mohammed-724b32189/">Mohammed Oubia</a> &middot;
-                            <a href="#">Anass Nassiri </a></div>
+                            <a href="https://www.linkedin.com/in/anass-nassiri-5487051a3">Anass Nassiri  </a></div>
 
                     </div>
                 </div>

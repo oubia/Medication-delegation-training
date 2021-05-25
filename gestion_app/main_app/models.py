@@ -1,13 +1,10 @@
 from django.db import models
-from django.db.models.deletion import DO_NOTHING
 from .utils import create_new_ref_number
-# Create your models here.
-class Userconnection(models.Model):
-    code = models.CharField(max_length=6)
-    password = models.CharField(max_length=6)
+from django.contrib.auth.models import User
 
-
-
+class RegesterUser(User):
+    model = User
+    
 class Affectation(models.Model):
     Centre_titre = models.CharField(max_length=100)
 
@@ -32,7 +29,7 @@ class MaterielModel(models.Model):
     Model = models.CharField(max_length=100)
     Serie = models.CharField(max_length=100)
     Observation = models.CharField(max_length=100)
-    # author_reception = models.CharField(max_length=10)
+    author_reception = models.CharField(max_length=10)
 
 
 class Livraison(models.Model):
@@ -46,7 +43,7 @@ class Livraison(models.Model):
     Prix_unitaire = models.FloatField()
     Decompte = models.CharField(max_length=100)
     Signatures = models.CharField(max_length=100)
-    # author_livraison = models.CharField(max_length=10)
+    author_livraison = models.CharField(max_length=10)
 
 
 
