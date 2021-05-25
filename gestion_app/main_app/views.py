@@ -8,6 +8,7 @@ import json
 from django.core import serializers
 from .forms import createuserform
 from django.contrib.auth import authenticate,login as dj_login,logout as logoutt
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -31,10 +32,16 @@ def logout(request):
     logoutt(request)
     return redirect('login')
 
+
+@login_required(login_url='login')
 def home(request):
     return render(request, 'home.html')
 
+@login_required(login_url='login')
 def reception(request):
+    current_user=request.user
+    username=current_user.username
+    print(username)
     if request.method == 'POST':
         if "Categoryform_add" in request.POST:
             a = list(CategoriesModel.objects.all().values())
@@ -73,7 +80,8 @@ def reception(request):
                 Marque = request.POST["Marque"],
                 Model = request.POST["Model"],
                 Serie = request.POST["Sriee"],
-                Observation = request.POST["Observation"]
+                Observation = request.POST["Observation"],
+                author_reception=username
             )
             New_materiel.save()
             messages.success(request, 'Votre tach a bien effectue !')
@@ -86,6 +94,9 @@ def reception(request):
     categories_data = CategoriesModel.objects.all().values()
     context = {"categories_data":categories_data}
     return render(request,'reception.html',context)
+
+
+@login_required(login_url='login')
 def livraison(request):
     centre_data = Affectation.objects.all()
     sous_centre_data = SousCentre.objects.all()
@@ -104,7 +115,8 @@ def livraison(request):
                 Quantite_livree = request.POST["Quantite_livre"],
                 Decompte  = request.POST["Decompt"],
                 Prix_unitaire = request.POST['Prix_unitaire'],
-                Signatures = request.POST["Singnature"])
+                Signatures = request.POST["Singnature"],
+                author_reception=username)
             New_livraison.save()
             New_livraison.Materiel.add(materiel)
             # New_Historique = historique(
@@ -149,7 +161,7 @@ def livraison(request):
 
 
 
-
+@login_required(login_url='login')
 def historique(request):
     return render(request,'historique.html')
 
