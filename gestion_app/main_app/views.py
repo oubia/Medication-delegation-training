@@ -60,28 +60,25 @@ def reception(request):
                 Centre_saver = Affectation(Centre_titre=request.POST["Centre"])
                 Centre_saver.save()
                 if request.POST["Sous_centre"] == '':
-                    
                     sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Centre"])
                     sous_centre.save()
                     messages.success(request, 'Votre tach a bien effectue !')
                     return render(request, 'reception.html')
-            else:
-                if request.POST["Sous_centre"] == '':
-                    Centre_saver = Affectation.objects.get(Centre_titre=request.POST["Centre"])
-                    sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Centre"])
-                    sous_centre.save()
-                    messages.success(request, 'Votre tach a bien effectue !')
-                    return render(request, 'reception.html')
+            elif request.POST["Sous_centre"] == '':
                 Centre_saver = Affectation.objects.get(Centre_titre=request.POST["Centre"])
-                sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Sous_centre"])
+                sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Centre"])
                 sous_centre.save()
                 messages.success(request, 'Votre tach a bien effectue !')
                 return render(request, 'reception.html')
+            Centre_saver = Affectation.objects.get(Centre_titre=request.POST["Centre"])
+            sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Sous_centre"])
+            sous_centre.save()
+            messages.success(request, 'Votre tach a bien effectue !')
+            return render(request, 'reception.html')
         elif "Desingation" in request.POST:
-            category_id = CategoriesModel.objects.get(category_name=request.POST["categorie"])
             New_materiel = MaterielModel(
                 Designation_Object = request.POST["Desingation"],
-                Category_name_id = category_id.id,
+                Category_name = request.POST["categorie"],
                 Quantite = request.POST["Quantite"],
                 Etat = request.POST["raiobox"],
                 Emplacement = request.POST["Emplacement"] ,
@@ -115,8 +112,6 @@ def livraison(request):
     if request.method == 'POST':
         if 'Titre_de_livraison' in request.POST:
             materiel = MaterielModel.objects.get(Designation_Object=request.POST["materiel"])
-            centre_id = Affectation.objects.get(Centre_titre=request.POST["Centre"])
-            sous_centre = SousCentre.objects.get(Sous_centre_titre=request.POST['Sous_Centre'])
             quantity = materiel.Quantite - int(request.POST["Quantite_livre"])
             if quantity>=0:
                 materiel.Quantite = quantity
@@ -124,9 +119,8 @@ def livraison(request):
                 materiel = materiel.id
                 New_livraison = Livraison(
                     Titre_livraison  = request.POST["Titre_de_livraison"],
-                    Category_name= request.POST["categorie"],
-                    Affectation  = centre_id,
-                    Sous_centre_id = sous_centre,
+                    Centre  = request.POST["Centre"],
+                    Sous_centre_id = request.POST['Sous_Centre'],
                     Quantite_livree = request.POST["Quantite_livre"],
                     Decompte  = request.POST["Decompt"],
                     Prix_unitaire = request.POST['Prix_unitaire'],
@@ -135,7 +129,6 @@ def livraison(request):
                     )
                 New_livraison.save()
                 New_livraison.Materiel.add(materiel)
-                materiel = MaterielModel.objects.get(Designation_Object=request.POST["materiel"])
                 New_Historique = historiqueModel(
                         Livraison_historique = New_livraison,
                         Materiel_historique = materiel,
@@ -146,7 +139,7 @@ def livraison(request):
                 return render(request, 'home.html')
             else:
                 messages.error(request, "OPs Votre tach elle n'a pas effectue ! verifier votre quantite")
-                return render(request, 'livraison.html')
+                return render(request, 'home.html')
         else:
             messages.error(request, "OPs Votre tach elle n'a pas effectue ! verifier votre quantite")
             return render(request, 'home.html')
