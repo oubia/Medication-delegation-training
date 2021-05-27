@@ -1,0 +1,49 @@
+def livraison(request):
+    current_user=request.user
+    username=current_user.username
+    materielle_data = MaterielModel.objects.all().values()
+    if request.method == 'POST':
+        if 'Titre_de_livraison' in request.POST:
+            materiel = MaterielModel.objects.get(Designation_Object=request.POST["materiel"])
+            quantity = materiel.Quantite - int(request.POST["Quantite_livre"])
+            if quantity>=0:
+                materiel.Quantite = quantity
+                materiel.save()
+                materiel = materiel
+                New_livraison = Livraison(
+                    Titre_livraison  = request.POST["Titre_de_livraison"],
+                    Centre  = request.POST["Centre"],
+                    Sous_centre_id = request.POST['Sous_Centre'],
+                    Quantite_livree = request.POST["Quantite_livre"],
+                    Decompte  = request.POST["Decompt"],
+                    Prix_unitaire = request.POST['Prix_unitaire'],
+                    Signatures = request.POST["Singnature"],
+                    author_livraison=username
+                    )
+                New_livraison.save()
+                New_livraison.Materiel.add(materiel)
+                New_Historique = historiqueModel(
+                        Livraison_historique = New_livraison,
+                        Materiel_historique = materiel,
+                        Centre_titre = request.POST["Centre"],
+                        Sous_centre_titre = request.POST['Sous_Centre'])
+                New_Historique.save()
+                messages.success(request, 'Votre tach a bien effectue !')
+                return render(request, 'home.html')
+            else:
+                messages.error(request, "OPs Votre tach elle n'a pas effectue ! verifier votre quantite")
+                return render(request, 'home.html')
+        else:
+            messages.error(request, "OPs Votre tach elle n'a pas effectue ! verifier votre quantite")
+            return render(request, 'home.html')
+    if request.is_ajax():
+        sous_centre = SousCentre.objects.all()
+        Center = Affectation.objects.all()
+        centre = CentreSerializer(Center,many=True)
+        sous_centre = SousCanterSerializer(sous_centre,many=True)
+        response = {
+            'centre': centre.data,
+            'sous_centre':sous_centre.data
+        }
+        return JsonResponse(response,safe=False, status=201)
+    return render(request,'livraison.html',context={'materielle_data':materielle_data})

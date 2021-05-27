@@ -116,7 +116,7 @@ def livraison(request):
             if quantity>=0:
                 materiel.Quantite = quantity
                 materiel.save()
-                materiel = materiel.id
+                materiel = materiel
                 New_livraison = Livraison(
                     Titre_livraison  = request.POST["Titre_de_livraison"],
                     Centre  = request.POST["Centre"],
