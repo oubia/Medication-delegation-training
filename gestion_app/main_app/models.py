@@ -1,27 +1,10 @@
 from django.db import models
-from django.db.models.deletion import DO_NOTHING
 from .utils import create_new_ref_number
 from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser
-
-# Create your models here.
 
 class RegesterUser(User):
     model = User
     
-    
-
-class Userconnection(models.Model):
-    code = models.CharField(max_length=6)
-    password = models.CharField(max_length=6)
-
-    def fun (self,code):
-        if self.code == code:
-            context = {'code':code}
-            return context
-
-
-
 class Affectation(models.Model):
     Centre_titre = models.CharField(max_length=100)
 
@@ -35,7 +18,7 @@ class CategoriesModel(models.Model):
 class MaterielModel(models.Model):
     Numero_inventaire_entre = models.CharField(max_length = 10,blank=True,editable=False,unique=True,default=create_new_ref_number)
     Designation_Object = models.CharField(max_length=80)
-    Category_name = models.ForeignKey(CategoriesModel,on_delete=models.CASCADE)
+    Category_name = models.CharField(max_length=80)
     Quantite = models.IntegerField()
     Etat = models.CharField(max_length=100,default='Nouveau')
     Emplacement = models.CharField(max_length=100)
@@ -53,8 +36,8 @@ class Livraison(models.Model):
     Numero_inventaire_sortie = models.CharField(max_length = 10,blank=True,editable=False,unique=True,default=create_new_ref_number)
     Titre_livraison = models.CharField(max_length=100)
     Materiel = models.ManyToManyField(MaterielModel,related_name='Materiel_id')#rm
-    Affectation = models.ForeignKey(Affectation , on_delete=models.CASCADE)#rm
-    Sous_centre_id = models.ForeignKey(SousCentre,on_delete=models.CASCADE)
+    Centre = models.CharField(max_length=200)
+    Sous_centre_id = models.CharField(max_length=200)
     Date_sortie = models.DateTimeField(auto_now_add=True) 
     Quantite_livree = models.IntegerField()
     Prix_unitaire = models.FloatField()
@@ -64,14 +47,8 @@ class Livraison(models.Model):
 
 
 
-class historique(models.Model):
+class historiqueModel(models.Model):
     Livraison_historique = models.ForeignKey(Livraison,on_delete=models.CASCADE)
     Materiel_historique = models.ForeignKey(MaterielModel,on_delete=models.CASCADE)
     Centre_titre = models.CharField(max_length=100)
     Sous_centre_titre = models.CharField(max_length=100)
-
-
-# class createuserform(models.Model):
-#     class Meta:
-#         model=User
-#         fields=['username','email','password1','password2']

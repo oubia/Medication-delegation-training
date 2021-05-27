@@ -10,4 +10,3 @@ class RegesteUseradmin(admin.ModelAdmin):
     list_display = ['username','password']
 
 admin.site.register(RegesterUser,RegesteUseradmin)
-

@@ -33,6 +33,59 @@ setTimeout(function() {
 function myFunction() {
     var input, filter, table, tr, td, td1, i, txtValue;
     input = document.getElementById("myInput");
+    console.log(input.innerHTML)
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        td1 = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+
+            txtValue = td.textContent || td.innerText;
+            txtValue1 = td1.textContent || td1.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {  
+                tr[i].style.display = "";
+            } else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+myFunction()
+
+function myFunction2() {
+    var input, filter, table, tr, td, td1, i, txtValue;
+    input = document.getElementById("myInput2");
+    console.log(input.innerHTML)
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable2");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        td1 = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+
+            txtValue = td.textContent || td.innerText;
+            txtValue1 = td1.textContent || td1.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {  
+                tr[i].style.display = "";
+            } else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+myFunction2()
+
+function myFunction1() {
+    var input, filter, table, tr, td, td1, i, txtValue;
+    input = document.getElementById("myInput1");
+    console.log(input.innerHTML)
     filter = input.value.toUpperCase();
     table = document.getElementById("myTable");
     tr = table.getElementsByTagName("tr");
@@ -53,4 +106,4 @@ function myFunction() {
         }
     }
 }
-myFunction()
+myFunction1()

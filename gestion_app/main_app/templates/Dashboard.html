@@ -9,10 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
+    <title>Dashboard</title>
     <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/historique.js'%}"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -22,7 +23,7 @@
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                <input class="form-control" type="text" id="myInput1" onkeyup="myFunction1()" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
                 <div class="input-group-append">
                     <button class="btn btn-outline-light" type="button"><i class="fas fa-search"></i></button>
                 </div>
@@ -33,9 +34,7 @@
             <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/login/" id="C">Connecter</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/logout/">Deconnecter</a>
+                <a class="dropdown-item btn-outline-dark" href="/logout">Deconnecter  <i class="fas fa-chevron-circle-right"></i></a>
             </div>
         </ul>
     </nav>
@@ -78,8 +77,8 @@
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    
-                    <div class="small" id="u">Logged in as: {{request.user}}</div>
+                    <div class="small">Logged in as:</div>
+                    {{request.user}}
                 </div>
             </nav>
         </div>
@@ -88,23 +87,14 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Created By <a href="https://www.linkedin.com/in/oubia-mohammed-724b32189/">Mohammed Oubia</a> &middot;
-                            <a href="#">Anass Nassiri </a href="https://www.linkedin.com/in/anass-nassiri-5487051a3"></div>
+                        <div class="text-muted" >Copyright &copy; Created By <a href="https://www.linkedin.com/in/oubia-mohammed-724b32189/">Mohammed Oubia</a> &middot;
+                            <a href="https://www.linkedin.com/in/anass-nassiri-5487051a3">Anass Nassiri  </a></div>
 
                     </div>
                 </div>
             </footer>
         </div>
     </div>
-    <script>a=document.getElementById("u").innerHTML;
-            console.log(a)
-            if (a!=NaN){
-                document.getElementById("C").innerHTML="";
-                document.getElementById("C").href="";
-            }
-
-    
-    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="{% static 'js/scripts.js'%}"></script>
