@@ -21,53 +21,60 @@
         {% include 'messages.html' %}
     </div>
     <main>
-        <h1 style="text-align: center;"> Voir les historique reception</h1>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        <div class="card-body">
+            <h1 style="text-align: center;"> Voir les historique reception</h1>
+            <input type="text" id="myInput" class="myTable" onkeyup="myFunction()" placeholder="Search for values.." title="Type in a name">
 
-        <table id="myTable">
-            <tr class="header">
-                <th style="width:35%;">Category_name</th>
-                <th style="width:35%;">Designation_Object</th>
-                <th style="width:35%;">Date_reception</th>
-                <th style="width:35%;">Emplacement</th>
-                <th style="width:35%;">Etat</th>
-                <th style="width:35%;">Numero_inventaire_entre</th>
-                <th style="width:35%;">Quantite</th>
-                <th style="width:35%;">Observation</th>
-                <th style="width:35%;">author_reception</th>
-                <th style="width:35%;">Prix_achat_total</th>
-                <th style="width:35%;">Prix_achat_unite</th>
-                <th style="width:35%;">Serie</th>
-                <th style="width:35%;">author_reception</th>
+            <div class="table-responsive">
+                <table id="myTable" class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Category name</th>
+                            <th scope="col">Designation Object</th>
+                            <th scope="col">Date reception</th>
+                            <th scope="col">Emplacement</th>
+                            <th scope="col">Etat</th>
+                            <th scope="col">Numero_inventaire_entre</th>
+                            <th scope="col">Quantite</th>
+                            <th scope="col">Observation</th>
+                            <th scope="col">Prix achat_total</th>
+                            <th scope="col">Prix achat_unite</th>
+                            <th scope="col">Serie</th>
+                            <th scope="col">author reception</th>
+                        </tr>
+                    </thead>
 
-            
-            </tr>
-            
-               
-        </table>
 
-        <h1 style="text-align: center;"> Voir les historique Livraison</h1>
-        <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for names.." title="Type in a name">
-        <table id="myTable2">
-            <tr class="header">
-                <th style="width:35%;">Titre de livraison</th>
-                <th style="width:35%;">Date_sortie</th>
-                <th style="width:35%;">Centre</th>
-                <th style="width:35%;">Decompte</th>
-                <th style="width:35%;">Numero de inventaire de sortie</th>
-                <th style="width:35%;">Prix_unitaire</th>
-                <th style="width:35%;">Numero_inventaire_entre</th>
-                <th style="width:35%;">Quantite_livree</th>
-                <th style="width:35%;">Observation</th>
-                <th style="width:35%;">Author</th>
+                </table>
 
-            
-            </tr>
-            
-               
-        </table>
-        
-        
+            </div>
+            <h1 style="text-align: center;"> Voir les historique Livraison</h1>
+            <input type="text" id="myInput" class="myTable2" onkeyup="myFunction()" placeholder="Search for values.." title="Type in a name">
+
+            <div class="table-responsive">
+                <table id="myTable2" class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Titre de livraison</th>
+                            <th scope="col">Date sortie</th>
+                            <th scope="col">Centre</th>
+                            <th scope="col">Decompte</th>
+                            <th scope="col">NIS</th>
+                            <th scope="col">Prix_unitaire</th>
+                            <th scope="col">NIE</th>
+                            <th scope="col">Quantite_livree</th>
+                            <th scope="col">Observation</th>
+                            <th scope="col">Author</th>
+                        </tr>
+                    </thead>
+
+
+
+                </table>
+            </div>
+        </div>
+
+
     </main>
 
 </body>

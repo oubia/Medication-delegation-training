@@ -32,10 +32,10 @@ setTimeout(function() {
 
 function myFunction() {
     var input, filter, table, tr, td, td1, i, txtValue;
-    input = document.getElementById("myInput");
+    input = document.getElementsByClassName("myInput");
     console.log(input.innerHTML)
     filter = input.value.toUpperCase();
-    table = document.getElementById("myTable");
+    table = document.getElementsByClassName("myTable");
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[0];
@@ -44,7 +44,7 @@ function myFunction() {
 
             txtValue = td.textContent || td.innerText;
             txtValue1 = td1.textContent || td1.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {  
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
             } else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
@@ -58,10 +58,10 @@ myFunction()
 
 function myFunction2() {
     var input, filter, table, tr, td, td1, i, txtValue;
-    input = document.getElementById("myInput2");
+    input = document.getElementsByClassName("myInput2");
     console.log(input.innerHTML)
     filter = input.value.toUpperCase();
-    table = document.getElementById("myTable2");
+    table = document.getElementsByClassName("myTable2");
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[0];
@@ -70,7 +70,7 @@ function myFunction2() {
 
             txtValue = td.textContent || td.innerText;
             txtValue1 = td1.textContent || td1.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {  
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
             } else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
