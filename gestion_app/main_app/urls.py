@@ -12,8 +12,8 @@ urlpatterns = [
     
     path('livraison/', views.livraison,name="livraison"),
     path('historique/', views.historique,name="historique"),
-    path('historiquer/', views.historiquer,name="historiquer"),
-    path('historiquel/', views.historiquel,name="historiquel"),
+    path('historique-reception/', views.historiquer,name="historiquer"),
+    path('historique-livraison/', views.historiquel,name="historiquel"),
 
     path('index2/', views.index2),
     path('pdf_view/', views.ViewPDF.as_view(), name="pdf_view"),

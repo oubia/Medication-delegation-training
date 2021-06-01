@@ -44,7 +44,7 @@ function myFunction() {
 
             txtValue = td.textContent || td.innerText;
             txtValue1 = td1.textContent || td1.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {  
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
             } else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
@@ -70,7 +70,7 @@ function myFunction2() {
 
             txtValue = td.textContent || td.innerText;
             txtValue1 = td1.textContent || td1.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {  
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
             } else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";

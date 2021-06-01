@@ -15,31 +15,32 @@
     <script src="{% static 'js/scripts.js'%}"></script>
     <title>historique</title>
 </head>
+
 <body>
 
-<main>
-    <div class="card-body">
-                <div class="card">
-                    <div class="card-header">
-                        Materiel form
-                    </div>
-                    <div class="card-body ">
-                        <form class="needs-validation" action="" method="POST" novalidate>
-                            {% csrf_token %} {{ form.as_p }}
-                            <label for="Materielform_delete" class="form-label">Material</label>
-                            <select id="Materielform_delete" name="Materielform_delete" class="form-control select" size="1" required>
+    <main>
+        <div class="card-body">
+            <div class="card">
+                <div class="card-header">
+                    Materiel form
+                </div>
+                <div class="card-body ">
+                    <form class="needs-validation" action="" method="POST" novalidate>
+                        {% csrf_token %} {{ form.as_p }}
+                        <label for="Materielform_delete" class="form-label">Material</label>
+                        <select id="Materielform_delete" name="Materielform_delete" class="form-control select" size="1" required>
                                         {% for data in materiel_data %}
                                         <option value="{{data.Designation_Object}}">{{data.Designation_Object}}</option>
                                         {% endfor %}
                                     </select>
-                            <hr class="my-4">
-                            <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Supprimier Materiel</button>
-                        </form>
-                    </div>
+                        <hr class="my-4">
+                        <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Supprimier Materiel</button>
+                    </form>
                 </div>
-            
-    </div>
-</main>
-{% endblock %}
+            </div>
+        </div>
+    </main>
+    {% endblock %}
 </body>
+
 </html>

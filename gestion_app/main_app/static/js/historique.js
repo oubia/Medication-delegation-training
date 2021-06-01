@@ -8,14 +8,14 @@ $(function($) {
             let historique = response.historique
             let reception = response.materielle_data
             let livraison = response.Livraison_data
-            console.log('historique',historique)
-            console.log('reception',reception)
-            console.log('livraison',livraison)
-            myArray=reception
+            console.log('historique', historique)
+            console.log('reception', reception)
+            console.log('livraison', livraison)
+            myArray = reception
             buildTable(myArray);
-            
-            
-            
+
+
+
         }
     })
 })
@@ -30,23 +30,23 @@ $(function($) {
             let historique = response.historique
             let reception = response.materielle_data
             let livraison = response.Livraison_data
-            console.log('historique',historique)
-            console.log('reception',reception)
-            console.log('livraison',livraison)
-            myArray1=livraison
+            console.log('historique', historique)
+            console.log('reception', reception)
+            console.log('livraison', livraison)
+            myArray1 = livraison
             buildTable1(myArray1);
-            
-            
-            
+
+
+
         }
     })
 })
 
-function buildTable(data){
-	let table = document.getElementById('myTable');
+function buildTable(data) {
+    let table = document.getElementById('myTable');
 
-	for (var i = 0; i < data.length; i++){
-        			var row = `<tr>
+    for (var i = 0; i < data.length; i++) {
+        var row = `<tr>
 						<td>${data[i].Category_name}</td>
                         <td>${data[i].Designation_Object}</td>
 						<td>${data[i].Date_reception}</td>
@@ -61,18 +61,18 @@ function buildTable(data){
                         <td>${data[i].Serie}</td>
                         <td>${data[i].author_reception}</td>
 					  </tr>`
-			table.innerHTML += row
+        table.innerHTML += row
 
 
-		}
+    }
 }
 
-function buildTable1(data){
-	let table = document.getElementById('myTable2');
+function buildTable1(data) {
+    let table = document.getElementById('myTable2');
 
-	for (var i = 0; i < data.length; i++){
+    for (var i = 0; i < data.length; i++) {
         console.log('test')
-        			var row = `<tr>
+        var row = `<tr>
                         <td>${data[i].Titre_livraison}</td>
                         <td>${data[i].Date_sortie}</td>
 						<td>${data[i].Centre}</td>
@@ -84,8 +84,8 @@ function buildTable1(data){
                         <td>${data[i].Observation}</td>
                         <td>${data[i].author_livraison}</td>
 					  </tr>`
-			table.innerHTML += row
+        table.innerHTML += row
 
 
-		}
+    }
 }
