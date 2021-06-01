@@ -1,21 +1,16 @@
+from .serializers import *
+from .models import * 
+from .forms import *
 from django.shortcuts import render ,redirect
 from django.contrib import messages
-from .models import * 
 from django.http import JsonResponse,HttpResponse
 from rest_framework.decorators import api_view
-from .serializers import *
 from django.contrib.auth import authenticate,login as dj_login,logout as logoutt
 from django.contrib.auth.decorators import login_required
 from io import BytesIO
 from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
-
-
-
-
-
-
 
 def login(request):
     if request.method=='POST':
@@ -37,7 +32,6 @@ def logout(request):
     messages.success(request,'Vous Deconnecter ! ')
 
     return redirect('login')
-
 
 @login_required(login_url='login')
 def home(request):
@@ -215,7 +209,6 @@ def historiquel(request):
         return JsonResponse(response,safe=False, status=201)
     return render(request,'historiquel.html')
 
-
 @login_required(login_url='login')
 def categories(request):
     if request.method == 'POST':
@@ -236,9 +229,6 @@ def categories(request):
             messages.error(request, "OPs Votre tach elle n'a pas effectue !")
             return render(request, 'categories.html')
     return render(request, 'categories.html')
-
-
-
 
 @login_required(login_url='login')
 def Centre(request):
@@ -265,13 +255,6 @@ def Centre(request):
             messages.success(request, 'Votre tach a bien effectue !')
             return render(request, 'Centre.html')
     return render(request,'Centre.html')
-
-
-
-
-
-
-
 
 @login_required(login_url='login')
 def Materiel(request):
@@ -334,8 +317,22 @@ class DownloadPDF(View):
 
 @login_required(login_url='login')
 def index2(request):
-	context = {}
-	return render(request, 'index2.html', context)
+    livraison_data_base = Livraison.objects.all().values()
+    keys = livraison_data_base[0].keys()
+    contxt = {'livraison_data_base':livraison_data_base,'keys':keys}
+    if request.method== 'POST':
+        form_name = request.POST["form-name"]
+        if form_name == 'bon_form':
+            A = request.POST['Derection']
+            
+            check_form = CheckboxForm()
+            print("Data selecteed",check_form)
+            pdf = render_to_pdf('pdf_template.html', data)
+            return HttpResponse(pdf, content_type='application/pdf')
+        else:
+            messages.error(request,"Ops Votre tach etes pa effectue")
+            return render(request, 'bon_livraison.html', contxt )
+    return render(request, 'bon_livraison.html', contxt )
 
 
 
