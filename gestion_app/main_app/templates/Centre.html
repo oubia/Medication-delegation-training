@@ -16,8 +16,9 @@
     <title>historique</title>
 </head>
 <body>
-<main>
-        <div class="card-body">
+    <main>
+        <div id="message">{% include 'messages.html' %} </div>
+            <div class="card-body">
                 <div class="card">
                     <div class="card-header">
                         Centre form
@@ -41,8 +42,30 @@
                         </form>
                     </div>
                 </div>
-        </div>
-</main>
-{% endblock %}
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                {% include 'alert.html' %}
+            </div>
+    </main>
 </body>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+{% endblock %}
 </html>

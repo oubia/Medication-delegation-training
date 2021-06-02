@@ -1,21 +1,16 @@
+from .serializers import *
+from .models import * 
+from .forms import *
 from django.shortcuts import render ,redirect
 from django.contrib import messages
-from .models import * 
 from django.http import JsonResponse,HttpResponse
 from rest_framework.decorators import api_view
-from .serializers import *
 from django.contrib.auth import authenticate,login as dj_login,logout as logoutt
 from django.contrib.auth.decorators import login_required
 from io import BytesIO
 from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
-
-
-
-
-
-
 
 def login(request):
     if request.method=='POST':
@@ -37,7 +32,6 @@ def logout(request):
     messages.success(request,'Vous Deconnecter ! ')
 
     return redirect('login')
-
 
 @login_required(login_url='login')
 def home(request):
@@ -235,9 +229,8 @@ def categories(request):
             print("Categoryform_delete" in request.POST)
             messages.error(request, "OPs Votre tach elle n'a pas effectue !")
             return render(request, 'categories.html')
-    return render(request, 'categories.html')
-
-
+    categories_data = CategoriesModel.objects.all().values()
+    return render(request, 'categories.html',context={"categories_data":categories_data})
 
 
 @login_required(login_url='login')
@@ -266,23 +259,14 @@ def Centre(request):
             return render(request, 'Centre.html')
     return render(request,'Centre.html')
 
-
-
-
-
-
-
-
 @login_required(login_url='login')
 def Materiel(request):
+    materiel_data = MaterielModel.objects.all().values()
     if request.method == 'POST':
         if 'Materielform_delete' in request.POST:
             MaterielModel.objects.filter(Designation_Object=request.POST['Materielform_delete']).delete()
             messages.success(request,'Materiel '+request.POST['Materielform_delete']+' A etait suppriemer !')
-    return render(request,'Materiel.html')
-
-
-
+    return render(request,'Materiel.html',context={'materiel_data':materiel_data})
 
 def render_to_pdf(template_src, context_dict={}):
 	template = get_template(template_src)
@@ -334,8 +318,24 @@ class DownloadPDF(View):
 
 @login_required(login_url='login')
 def index2(request):
-	context = {}
-	return render(request, 'index2.html', context)
+    livraison_data_base = Livraison.objects.all().values()
+    keys = livraison_data_base[0].keys()
+    categories_data = CategoriesModel.objects.all().values()
+    contxt = {'livraison_data_base':livraison_data_base,'keys':keys,'categories_data':categories_data}
+    if request.method== 'POST':
+        form_name = request.POST["form-name"]
+        if form_name == 'bon_form':
+            A = request.POST['Derection']
+            
+            check_form = CheckboxForm()
+            print("Data selecteed",check_form)
+            pdf = render_to_pdf('pdf_template.html', data)
+            return HttpResponse(pdf, content_type='application/pdf')
+        else:
+            messages.error(request,"Ops Votre tach etes pa effectue")
+            return render(request, 'bon_livraison.html', contxt )
+    
+    return render(request, 'bon_livraison.html', contxt )
 
 
 
