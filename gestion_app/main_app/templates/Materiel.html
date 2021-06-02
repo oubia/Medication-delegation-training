@@ -26,15 +26,25 @@
                 </div>
                 <div class="card-body ">
                     <form class="needs-validation" action="" method="POST" novalidate>
+
                         {% csrf_token %} {{ form.as_p }}
-                        <label for="Materielform_delete" class="form-label">Material</label>
-                        <select id="Materielform_delete" name="Materielform_delete" class="form-control select" size="1" required>
+                        <div class="form-row ">
+                            <div class="form-group col-md-6">
+
+                                <label for="Materielform_delete" class="form-label">Material</label>
+                                <select id="Materielform_delete" name="Materielform_delete" class="form-control select" size="1" required>
                                         {% for data in materiel_data %}
                                         <option value="{{data.Designation_Object}}">{{data.Designation_Object}}</option>
                                         {% endfor %}
                                     </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="add_َQuantity" class="form-label">Ajouter un Quantiter</label>
+                                <input type="text" class="form-control " name="add_َQuantity" placeholder="Entrée la désignation des objets">
+                            </div>
+                        </div>
                         <hr class="my-4">
-                        <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Supprimier Materiel</button>
+                        <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Ajouter un quantiter</button>
                     </form>
                 </div>
             </div>

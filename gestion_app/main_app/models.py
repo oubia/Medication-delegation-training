@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 
 class RegesterUser(User):
     model = User
+
+class CategoriesData(models.Model):
+    category_name = models.CharField(max_length=100)
     
 class Affectation(models.Model):
     Centre_titre = models.CharField(max_length=100)
@@ -11,9 +14,6 @@ class Affectation(models.Model):
 class SousCentre(models.Model):
     centre_titre = models.ForeignKey(Affectation , on_delete=models.CASCADE)
     Sous_centre_titre = models.CharField(max_length=100)
-
-class CategoriesModel(models.Model):
-    category_name = models.CharField(max_length=100)
 
 class MaterielModel(models.Model):
     Numero_inventaire_entre = models.CharField(max_length = 10,blank=True,editable=False,unique=True,default=create_new_ref_number)
@@ -31,9 +31,9 @@ class MaterielModel(models.Model):
     Observation = models.CharField(max_length=100)
     author_reception = models.CharField(max_length=10)
 
-
 class Livraison(models.Model):
     Numero_inventaire_sortie = models.CharField(max_length = 10,blank=True,editable=False,unique=True,default=create_new_ref_number)
+    Designation_Object_livraison = models.CharField(max_length=100)
     Titre_livraison = models.CharField(max_length=100)
     Materiel = models.ManyToManyField(MaterielModel,related_name='Materiel_id')#rm
     Centre = models.CharField(max_length=200)
@@ -44,8 +44,6 @@ class Livraison(models.Model):
     Decompte = models.CharField(max_length=100)
     Signatures = models.CharField(max_length=100)
     author_livraison = models.CharField(max_length=10)
-
-
 
 class historiqueModel(models.Model):
     Livraison_historique = models.ForeignKey(Livraison,on_delete=models.CASCADE)

@@ -1,6 +1,5 @@
 from .serializers import *
 from .models import * 
-from .forms import *
 from django.shortcuts import render ,redirect
 from django.contrib import messages
 from django.http import JsonResponse,HttpResponse
@@ -35,50 +34,19 @@ def logout(request):
 
 @login_required(login_url='login')
 def home(request):
-    return render(request, 'home.html')
+    total_livraison = Livraison.objects.count()
+    total_reception = MaterielModel.objects.count()
+    total_center = Affectation.objects.count()
+    contxt = {"total_livraison":total_livraison,"total_reception":total_reception,"total_center":total_center}
+    return render(request, 'home.html',contxt)
 
 @login_required(login_url='login')
 def reception(request):
     current_user=request.user
     username=current_user.username
     if request.method == 'POST':
-        if "Categoryform_add" in request.POST:
-            a = list(CategoriesModel.objects.all().values())
-            if not any(d['category_name'] == request.POST["Categoryform_add"]  for d in a):
-                Category_saver = CategoriesModel(category_name=request.POST["Categoryform_add"])
-                Category_saver.save()
-                messages.success(request, 'Votre tach a bien effectue !')
-                return render(request, 'home.html')
-            else:
-                messages.info(request, 'Votre choix est deja dans la base de donnees !')
-                return render(request, 'home.html')
-        elif "Categoryform_delete" in request.POST:
-            CategoriesModel.objects.filter(category_name=request.POST["Categoryform_delete"]).delete()
-        elif 'Materielform_delete' in request.POST:
-            MaterielModel.objects.filter(Designation_Object=request.POST['Materielform_delete']).delete()
-            messages.success(request,'Materiel '+request.POST['Materielform_delete']+' A etait suppriemer !')
-        elif "Centre" in request.POST:
-            a = list(Affectation.objects.all().values())
-            if not any(d['Centre_titre'] == request.POST["Centre"]  for d in a):
-                Centre_saver = Affectation(Centre_titre=request.POST["Centre"])
-                Centre_saver.save()
-                if request.POST["Sous_centre"] == '':
-                    sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Centre"])
-                    sous_centre.save()
-                    messages.success(request, 'Votre tach a bien effectue !')
-                    return render(request, 'reception.html')
-            elif request.POST["Sous_centre"] == '':
-                Centre_saver = Affectation.objects.get(Centre_titre=request.POST["Centre"])
-                sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Centre"])
-                sous_centre.save()
-                messages.success(request, 'Votre tach a bien effectue !')
-                return render(request, 'reception.html')
-            Centre_saver = Affectation.objects.get(Centre_titre=request.POST["Centre"])
-            sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Sous_centre"])
-            sous_centre.save()
-            messages.success(request, 'Votre tach a bien effectue !')
-            return render(request, 'reception.html')
-        elif "Desingation" in request.POST:
+       
+        if "Desingation" in request.POST:
             New_materiel = MaterielModel(
                 Designation_Object = request.POST["Desingation"],
                 Category_name = request.POST["categorie"],
@@ -101,7 +69,7 @@ def reception(request):
             messages.error(request, "OPs Votre tach elle n'a pas effectue !")
             return render(request, 'reception.html')
 
-    categories_data = CategoriesModel.objects.all().values()
+    categories_data = CategoriesData.objects.all().values()
     materiel_data = MaterielModel.objects.all().values
     context = {"categories_data":categories_data,'materiel_data':materiel_data}
     return render(request,'reception.html',context)
@@ -121,6 +89,7 @@ def livraison(request):
                 materiel.save()
                 materiel = materiel
                 New_livraison = Livraison(
+                    Designation_Object_livraison=request.POST["materiel"],
                     Titre_livraison  = request.POST["Titre_de_livraison"],
                     Centre  = request.POST["Centre"],
                     Sous_centre_id = request.POST['Sous_Centre'],
@@ -214,9 +183,9 @@ def historiquel(request):
 def categories(request):
     if request.method == 'POST':
         if "Categoryform_add" in request.POST:
-            a = list(CategoriesModel.objects.all().values())
+            a = list(CategoriesData.objects.all().values())
             if not any(d['category_name'] == request.POST["Categoryform_add"]  for d in a):
-                Category_saver = CategoriesModel(category_name=request.POST["Categoryform_add"])
+                Category_saver = CategoriesData(category_name=request.POST["Categoryform_add"])
                 Category_saver.save()
                 messages.success(request, 'Votre tach a bien effectue !')
                 return render(request, 'categories.html')
@@ -224,12 +193,12 @@ def categories(request):
                 messages.info(request, 'Votre choix est deja dans la base de donnees !')
                 return render(request, 'categories.html')
         elif "Categoryform_delete" in request.POST:
-            CategoriesModel.objects.filter(category_name=request.POST["Categoryform_delete"]).delete()
+            CategoriesData.objects.filter(category_name=request.POST["Categoryform_delete"]).delete()
         else:
             print("Categoryform_delete" in request.POST)
             messages.error(request, "OPs Votre tach elle n'a pas effectue !")
             return render(request, 'categories.html')
-    categories_data = CategoriesModel.objects.all().values()
+    categories_data = CategoriesData.objects.all().values()
     return render(request, 'categories.html',context={"categories_data":categories_data})
 
 
@@ -237,35 +206,39 @@ def categories(request):
 def Centre(request):
     if request.method == 'POST':
         if "Centre" in request.POST:
+            sous_centre = (request.POST['Sous_centre']).split(",")
             a = list(Affectation.objects.all().values())
             if not any(d['Centre_titre'] == request.POST["Centre"]  for d in a):
                 Centre_saver = Affectation(Centre_titre=request.POST["Centre"])
                 Centre_saver.save()
-                if request.POST["Sous_centre"] == '':
+                if sous_centre == '':
                     sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Centre"])
                     sous_centre.save()
                     messages.success(request, 'Votre tach a bien effectue !')
                     return render(request, 'Centre.html')
-            elif request.POST["Sous_centre"] == '':
+            elif sous_centre == '':
                 Centre_saver = Affectation.objects.get(Centre_titre=request.POST["Centre"])
                 sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Centre"])
                 sous_centre.save()
                 messages.success(request, 'Votre tach a bien effectue !')
                 return render(request, 'Centre.html')
             Centre_saver = Affectation.objects.get(Centre_titre=request.POST["Centre"])
-            sous_centre = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=request.POST["Sous_centre"])
-            sous_centre.save()
+            for i in range (len(sous_centre)):
+                sous_centre1 = SousCentre(centre_titre_id=Centre_saver.id,Sous_centre_titre=sous_centre[i])
+                sous_centre1.save()
             messages.success(request, 'Votre tach a bien effectue !')
             return render(request, 'Centre.html')
     return render(request,'Centre.html')
 
 @login_required(login_url='login')
 def Materiel(request):
-    materiel_data = MaterielModel.objects.all().values()
+    materiel_data = MaterielModel.objects.filter(Quantite=0)
     if request.method == 'POST':
+        materiel = MaterielModel.objects.get(Quantite=0)
         if 'Materielform_delete' in request.POST:
-            MaterielModel.objects.filter(Designation_Object=request.POST['Materielform_delete']).delete()
-            messages.success(request,'Materiel '+request.POST['Materielform_delete']+' A etait suppriemer !')
+            materiel.Quantite = int(request.POST['add_َQuantity'])
+            materiel.save()
+            messages.success(request,'La quantiter du Materiel '+request.POST['Materielform_delete']+' A etait modifier !')
     return render(request,'Materiel.html',context={'materiel_data':materiel_data})
 
 def render_to_pdf(template_src, context_dict={}):
@@ -279,21 +252,9 @@ def render_to_pdf(template_src, context_dict={}):
 
 
 data = {
-	"company": "anasox Company",
-	"address": "123 Street name",
-	"city": "Vancouver",
-	"state": "WA",
-	"zipcode": "98663",
-
-
-	"phone": "555-555-2345",
-	"email": "youremail@dennisivy.com",
-	"website": "dennisivy.com",
 	}
 
 
-data_livraison=CategoriesModel.objects.all().values()
-print(data_livraison)
 
 #Opens up page as PDF
 class ViewPDF(View):
@@ -319,18 +280,36 @@ class DownloadPDF(View):
 @login_required(login_url='login')
 def index2(request):
     livraison_data_base = Livraison.objects.all().values()
+    historique = historiqueModel.objects.all().values()
     keys = livraison_data_base[0].keys()
-    categories_data = CategoriesModel.objects.all().values()
+    categories_data = CategoriesData.objects.all().values()
     contxt = {'livraison_data_base':livraison_data_base,'keys':keys,'categories_data':categories_data}
     if request.method== 'POST':
         form_name = request.POST["form-name"]
         if form_name == 'bon_form':
             A = request.POST['Derection']
-            
-            check_form = CheckboxForm()
-            print("Data selecteed",check_form)
-            pdf = render_to_pdf('pdf_template.html', data)
-            return HttpResponse(pdf, content_type='application/pdf')
+            Du_materiel = request.POST['Du_materiel']
+            checkbox = (request.POST['attendence']).split(",")
+            centre,sous_centre,designation,list_livraison,quantity,prix_unitaire,Decompte,N_invontaire,list_materiel= [],[],[],[],[],[],[],[],[] 
+            lenth = []
+            for i in range (len(checkbox)-1):
+                centre.append((historiqueModel.objects.get(Livraison_historique=int(checkbox[i]))).Centre_titre)
+                sous_centre.append((historiqueModel.objects.get(Livraison_historique=int(checkbox[i]))).Sous_centre_titre)
+                list_livraison.append(Livraison.objects.get(id=checkbox[i]))
+            if all(x == centre[0] for x in centre) and all(x == sous_centre[0] for x in sous_centre):
+                for element in list_livraison:
+                    designation.append(element.Designation_Object_livraison)
+                    quantity.append(element.Quantite_livree)
+                    prix_unitaire.append(element.Prix_unitaire)
+                    Decompte.append(element.Decompte)
+                    N_invontaire.append(element.Numero_inventaire_sortie)
+                more_data = zip(designation,quantity,prix_unitaire,Decompte,N_invontaire)
+                data_all={"A":A,"Du_materiel":Du_materiel,"centre":centre[0],"sous_centre":sous_centre[0],'more_data':more_data}    
+                pdf = render_to_pdf('pdf_template.html', data_all)
+                return HttpResponse(pdf, content_type='application/pdf')
+            else:
+                messages.error(request,"Ops Votre tach etes pa effectue centre")
+                return render(request, 'bon_livraison.html', contxt )            # print(centre,sous_centre)
         else:
             messages.error(request,"Ops Votre tach etes pa effectue")
             return render(request, 'bon_livraison.html', contxt )
