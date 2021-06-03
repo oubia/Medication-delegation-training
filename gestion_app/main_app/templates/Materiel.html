@@ -22,7 +22,7 @@
         <div class="card-body">
             <div class="card">
                 <div class="card-header">
-                    Materiel form
+                    Matériel form
                 </div>
                 <div class="card-body ">
                     <form class="needs-validation" action="" method="POST" novalidate>
@@ -31,7 +31,7 @@
                         <div class="form-row ">
                             <div class="form-group col-md-6">
 
-                                <label for="Materielform_delete" class="form-label">Material</label>
+                                <label for="Materielform_delete" class="form-label">Matériel</label>
                                 <select id="Materielform_delete" name="Materielform_delete" class="form-control select" size="1" required>
                                         {% for data in materiel_data %}
                                         <option value="{{data.Designation_Object}}">{{data.Designation_Object}}</option>
@@ -39,12 +39,12 @@
                                     </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="add_َQuantity" class="form-label">Ajouter un Quantiter</label>
-                                <input type="text" class="form-control " name="add_َQuantity" placeholder="Entrée une quantiter">
+                                <label for="add_َQuantity" class="form-label">Ajouter une quantité</label>
+                                <input type="text" class="form-control " name="add_َQuantity" placeholder="Entrée une quantité">
                             </div>
                         </div>
                         <hr class="my-4">
-                        <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Ajouter une quantiter</button>
+                        <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Ajouter une quantité</button>
                     </form>
                 </div>
             </div>
