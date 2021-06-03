@@ -21,30 +21,38 @@
         {% include 'messages.html' %}
     </div>
     <main class="card -m-6">
-        <h1 style="text-align: center;"> Voir les historique reception</h1>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-        <div style="overflow-x:auto;" class="card-body">
-            <table id="myTable" class="table table-bordered"">
-                <thead class="thead-primary">
-                    <tr class="header">
-                        <th style="width:35%;" scope="col">Category_name</th>
-                        <th style="width:35%;" scope="col">Designation_Object</th>
-                        <th style="width:20%;" scope="col">Date_reception</th>
-                        <th style="width:35%;" scope="col">Emplacement</th>
-                        <th style="width:35%;" scope="col">Etat</th>
-                        <th style="width:35%;" scope="col">Numero_inventaire_entre</th>
-                        <th style="width:35%;" scope="col">Quantite</th>
-                        <th style="width:35%;" scope="col">Observation</th>
-                        <th style="width:35%;" scope="col">Prix_achat_total</th>
-                        <th style="width:35%;" scope="col">Prix_achat_unite</th>
-                        <th style="width:35%;" scope="col">Serie</th>
-                        <th style="width:35%;" scope="col">author_reception</th>
+        <div class="card-body">
+            <div class="card">
+                <div class="card-header">
+                    Reception Historique
+                </div>
+                <div class="card-body ">
+                    <div style="overflow-x:auto;" class="card-body">
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                        <table id="myTable" class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr class="header">
+                                    <th style="width:35%;" scope="col">Category_name</th>
+                                    <th style="width:35%;" scope="col">Designation_Object</th>
+                                    <th style="width:20%;" scope="col">Date_reception</th>
+                                    <th style="width:35%;" scope="col">Emplacement</th>
+                                    <th style="width:35%;" scope="col">Etat</th>
+                                    <th style="width:35%;" scope="col">Numero_inventaire_entre</th>
+                                    <th style="width:35%;" scope="col">Quantite</th>
+                                    <th style="width:35%;" scope="col">Observation</th>
+                                    <th style="width:35%;" scope="col">Prix_achat_total</th>
+                                    <th style="width:35%;" scope="col">Prix_achat_unite</th>
+                                    <th style="width:35%;" scope="col">Serie</th>
+                                    <th style="width:35%;" scope="col">author_reception</th>
 
-                    
-                    </tr>
-                </thead>
-            </table>
-        </div>
+                                
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>    
     </main>
 
 </body>

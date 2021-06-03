@@ -4,7 +4,6 @@
 }
 
 #myInput {
-    margin: 8px;
     background-image: url('/css/searchicon.png');
     background-position: 10px 10px;
     background-repeat: no-repeat;
@@ -15,7 +14,6 @@
     margin-bottom: 12px;
 }
 #myInput2 {
-    margin: 8px;
     background-image: url('/css/searchicon.png');
     background-position: 10px 10px;
     background-repeat: no-repeat;
@@ -28,7 +26,6 @@
 
 
 .myTable {
-    margin: 8px;
     border-collapse: collapse;
     width: 99%;
     border: 1px solid #ddd;
@@ -48,4 +45,15 @@
 .myTable tr.header,
 .myTable tr:hover {
     background-color: #f1f1f1;
+}
+.aimg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+#myInput3{
+    margin-bottom:5px ;
+    width: 30%;
+    height: 40px;
 }
