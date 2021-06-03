@@ -28,52 +28,21 @@
 </script>
 
 <body>
-    <!-- <style>
-        #tags {
-            float: left;
-            border: 1px solid #ccc;
-            padding: 5px;
-            font-family: Arial;
-        }
-        
-        #tags>span {
-            cursor: pointer;
-            display: block;
-            float: left;
-            color: #fff;
-            background: #789;
-            padding: 5px;
-            padding-right: 25px;
-            margin: 4px;
-        }
-        
-        #tags>span:hover {
-            opacity: 0.7;
-        }
-        
-        #tags>span:after {
-            position: absolute;
-            content: "×";
-            border: 1px solid;
-            padding: 2px 5px;
-            margin-left: 3px;
-            font-size: 11px;
-        }
-    </style> -->
+
     <main>
         <div id="message">{% include 'messages.html' %} </div>
         <div class="card-body">
             <div class="card">
                 <div class="card-header">
-                    Centre form
+                    Formation form
                 </div>
                 <div class="card-body ">
                     <form class="needs-validation" action="" method="POST" novalidate>
                         {% csrf_token %} {{ form.as_p }}
                         <div class="form-row ">
                             <div class="form-group col-md-6">
-                                <label for="Centre" class="form-label">Le centre principal</label>
-                                <input type="text" class="form-control " name="Centre" placeholder="Entrée la désignation des objets" required>
+                                <label for="Centre" class="form-label">La Formation principal</label>
+                                <input type="text" class="form-control " name="Centre" placeholder="Entrée la formation" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Sous_centre" class="form-label">Centre d'affiliation</label>
