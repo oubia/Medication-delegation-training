@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class RegesterUser(User):
     model = User
+    
 
 class CategoriesData(models.Model):
     category_name = models.CharField(max_length=100)
