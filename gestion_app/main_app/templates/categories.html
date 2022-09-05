@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <main>
     <div id="accordion">
         <div class="card-header" id="headingTwo">
@@ -36,10 +37,80 @@
                                     <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Supprimier category</button>
                                 </form>
                             </div>
+=======
+<!DOCTYPE html>
+<html lang="fr">
+{% extends 'Dashboard.html' %} {% load static %}{% block content %}
+
+
+
+<body>
+    <main>
+        <div id="message">{% include 'messages.html' %}
+        </div>
+        <div class="card-body">
+            <div class="card">
+                <div class="card-header">
+                    Catégories form
+                </div>
+                <div class="card-body ">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <form class="needs-validation" action="" method="POST" novalidate>
+                                {% csrf_token %} {{ form.as_p }}
+                                <label for="Categoryform_add" class="form-label">Ajouter des Catégorie</label>
+                                <input type="text" class="form-control " name="Categoryform_add" placeholder="Entrée une Catégorie " required>
+                                <hr class="my-4">
+                                <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Ajouter Catégorie</button>
+                            </form>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <form class="needs-validation" action="" method="POST" novalidate>
+                                {% csrf_token %} {{ form.as_p }}
+                                <label for="Categoryform_delete" class="form-label">Catégorie</label>
+                                <select id="categorie" name="Categoryform_delete" class="form-control select" size="1" required>
+                                        {% for data in categories_data %}
+                                        <option value="{{data.category_name}}">{{data.category_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                <hr class="my-4">
+                                <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Supprimier Catégorie</button>
+                            </form>
+>>>>>>> anass
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
     </div>
 </main>
+=======
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            {% include 'alert.html' %}
+        </div>
+    </main>
+</body>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+{% endblock %}
+
+</html>
+>>>>>>> anass

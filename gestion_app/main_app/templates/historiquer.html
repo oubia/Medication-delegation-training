@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'Dashboard.html' %} {% load static %}{% block content %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/main.css'%}" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
+    </script>
+    <script src="{% static 'js/historique.js'%}"></script>
+    <script src="{% static 'js/scripts.js'%}"></script>
+    <title>historique</title>
+</head>
+
+<body>
+    <div id="message">
+        {% include 'messages.html' %}
+    </div>
+    <main class="card -m-6">
+        <div class="card-body">
+            <div class="card">
+                <div class="card-header">
+                    Historique de Reception
+                </div>
+                <div class="card-body ">
+                    <div style="overflow-x:auto;" class="card-body">
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search par Catégorie , Designation , Date,Ne d'enventair" title="Type in a name">
+                        <table id="myTable" class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr class="header">
+                                    <th style="width:20%;" scope="col">Catégorie</th>
+                                    <th style="width:35%;" scope="col">Designation</th>
+                                    <th style="width:15%;" scope="col"> Date</th>
+                                    <th style="width:35%;" scope="col">Emplacement</th>
+                                    <th style="width:10%;" scope="col">Etat</th>
+                                    <th style="width:35%;" scope="col">Ne d'enventair</th>
+                                    <th style="width:35%;" scope="col">Quantite</th>
+                                    <th style="width:35%;" scope="col">Observation</th>
+                                    <th style="width:35%;" scope="col">Prix total</th>
+                                    <th style="width:35%;" scope="col">Prix d'unite</th>
+                                    <th style="width:35%;" scope="col">Serie</th>
+                                    <th style="width:35%;" scope="col">author</th>
+                                
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </main>
+
+</body>
+
+{% endblock %}
+
+</html>

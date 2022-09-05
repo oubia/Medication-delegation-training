@@ -15,7 +15,11 @@
 </head>
 {% block content %}
 
+<<<<<<< HEAD
 <body class="bg-primary">
+=======
+<body class="bg-warning">
+>>>>>>> anass
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
@@ -32,6 +36,7 @@
                                 <div class="card-body">
 
                                     <form class="needs-validation " name="form" action="." method="POST" novalidate>
+<<<<<<< HEAD
                                         {% csrf_token %} {{ form.as_p }}
                                         <div class="form-group">
                                             <label class="small mb-1" for="Code">Code</label>
@@ -40,6 +45,16 @@
                                         <div class="form-group">
                                             <label class="small mb-1" for="Password">Password</label>
                                             <input class="form-control py-4" name="Password" type="password" placeholder="Enter vous mode de pass" / required>{{password}}
+=======
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="Code">username</label>
+                                            <input class="form-control py-4" name="username" type="text" placeholder="Enter vous code ici" / required>{{code}}
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="Password">Password</label>
+                                            <input class="form-control py-4" name="password" type="password" placeholder="Enter vous mode de pass" / required>{{password}}
+>>>>>>> anass
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
@@ -49,6 +64,10 @@
                                         </div>
                                         <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                             <input type="submit" value="Login" class="btn btn-outline-dark" href="/">
+<<<<<<< HEAD
+=======
+
+>>>>>>> anass
                                         </div>
                                     </form>
                                 </div>
@@ -58,13 +77,22 @@
                     </div>
                 </div>
             </main>
+<<<<<<< HEAD
+=======
+
+>>>>>>> anass
         </div>
         <div id="layoutAuthentication_footer">
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; Created By <a href="https://www.linkedin.com/in/oubia-mohammed-724b32189/">Mohammed Oubia</a> &middot;
+<<<<<<< HEAD
                             <a href="#">Anass Nassiri </a></div>
+=======
+                            <a href="https://www.linkedin.com/in/anass-nassiri-5487051a3">Anass Nassiri  </a>
+                        </div>
+>>>>>>> anass
                     </div>
                 </div>
             </footer>

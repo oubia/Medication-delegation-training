@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'Dashboard.html' %} {% load static %}{% block content %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/main.css'%}" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
+    </script>
+    <script src="{% static 'js/historique.js'%}"></script>
+    <script src="{% static 'js/scripts.js'%}"></script>
+    <title>historique</title>
+</head>
+
+<body>
+
+    <main>
+        <div class="card-body">
+            <div class="card">
+                <div class="card-header">
+                    Matériel form
+                </div>
+                <div class="card-body ">
+                    <form class="needs-validation" action="" method="POST" novalidate>
+
+                        {% csrf_token %} {{ form.as_p }}
+                        <div class="form-row ">
+                            <div class="form-group col-md-6">
+
+                                <label for="Materielform_delete" class="form-label">Matériel</label>
+                                <select id="Materielform_delete" name="Materielform_delete" class="form-control select" size="1" required>
+                                        {% for data in materiel_data %}
+                                        <option value="{{data.Designation_Object}}">{{data.Designation_Object}}</option>
+                                        {% endfor %}
+                                    </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="add_َQuantity" class="form-label">Ajouter une quantité</label>
+                                <input type="text" class="form-control " name="add_َQuantity" placeholder="Entrée une quantité">
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <button class=" btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#exampleModal">Ajouter une quantité</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% endblock %}
+</body>
+
+</html>

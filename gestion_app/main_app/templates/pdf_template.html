@@ -1,0 +1,91 @@
+<head>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        
+        table,
+        td,
+        th {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content">
+        <p>ROYAUME DU MAROC<br>MINISTERE DE LA SANTE<br>DELEGATION DE BENI MELLAL <br> SERVICE D'APPROVISIONNEMENT</p>
+        <h1>BON DE LIVRAISON</h1>
+        <p>Du matériel de :{{Du_materiel}}</p>
+        <p>A:Mr le {{A}}/{{sous_centre}}</p>
+
+        <!-- HTML Content -->
+        <table>
+            <tr>
+
+                <th>DESIGNATION DES ARTICLES</th>
+                <th>QUANTITE LIVREE</th>
+                <th>prix unitaire</th>
+                <th>DECOMPTE</th>
+                <th>N° D'INVENTAIR</th>
+            </tr>
+
+            {% for i in more_data %}
+            <tr>
+                <td>{{i.0}}</td>
+                <td>{{i.1}}</td>
+                <td>{{i.2}}</td>
+                <td>{{i.3}}</td>
+                <td>{{i.4}}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        <!-- {% for i in designation %}
+                <tr>
+                    <td>{{i}}</td>
+                </tr> {% endfor %} {% for i in quantity %}
+                <tr>
+                    <td>{{i}}</td>
+                </tr> {% endfor %} {% for i in prix_unitaire %}
+                <tr>
+                    <td>{{i}}</td>
+                </tr> {% endfor %} {% for i in Decompte %}
+                <tr>
+                    <td>{{i}}</td>
+                </tr> {% endfor %} {% for i in N_invontaire %}
+                <tr>
+                    <td>{{i}}</td>
+                </tr> {% endfor %} -->
+        </tr>
+        </table>
+        <p>AFFECTATION :{{centre}}</p>
+        <p>N.B.:Une copie du Bon Livraison est à retourner au service de l'approvisionnement après certification et <br> prise en charge à l'inventaire.<br> Matériel receptionné le:<br> Sous N°<br>
+        </p>
+        <p>
+            Mr le délégué Mr le chef des services administratif et économique
+
+        </p>
+        <h1>Reçu le:</h1><br><br>
+        <h1>Par:</h1><br><br>
+    </div>
+
+    <!-- Content for Static Frame 'footer_frame' 
+    <div id="footer_content">(c) - page <pdf:pagenumber>
+        of <pdf:pagecount>
+    </div>-->
+
+
+
+
+
+</body>
+
+</html>

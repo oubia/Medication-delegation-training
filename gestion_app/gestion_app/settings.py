@@ -135,4 +135,8 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> anass
